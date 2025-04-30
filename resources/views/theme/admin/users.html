@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fa" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../assets/styles/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <title>کاربران</title>
+</head>
+
+<body dir="rtl">
+    <div class="h-[100svh] flex flex-row overflow-hidden">
+        <!-- Sidebar -->
+        <aside class="w-1/5 h-full bg-zinc-800 flex flex-col justify-start items-center p-10">
+            <img src="../Logo.png" alt="TechBinary" class="w-full  md:pb-10">
+            <nav
+                class="flex-1 flex flex-col justify-start w-full text-right text-light-text-soft/80 items-start space-y-5 font-bold text-lg">
+                <a href="dashboard.html" class="admin-aside-a"><i class="fa fa-tachometer pl-3"></i>داشبورد</a>
+                <a href="categories.html" class="admin-aside-a"><i class="far fa-folder-open pl-3"></i>دسته بندی ها</a>
+                <a href="posts.html" class="admin-aside-a"><i class="fas fa-file pl-3"></i>پست ها</a>
+                <a href="comments.html" class="admin-aside-a"><i class="fa fa-comment pl-3"></i>کامنت ها</a>
+                <a href="users.html" class="admin-aside-a"><i class="fa fa-users pl-3"></i>کاربران</a>
+            </nav>
+        </aside>
+        <!-- sidebarEnd -->
+
+        <!-- Main Content -->
+        <main class="w-4/5 h-full bg-light-text-soft flex flex-col px-10 py-5 relative">
+
+
+
+            <div id="alerts" class="w-full absolute top-0 left-0 flex flex-col space-y-3 px-[60px]">
+                <!-- اینجا باید ارور ها یا همون الرت ها رو نشون بدی -->
+
+
+                <div
+                    class="alert alert-show alert-success flex items-center p-4 text-green-800 border-t-4 border-green-300 bg-green-50 dark:text-green-400 dark:bg-gray-800 dark:border-green-800">
+                    <svg class="shrink-0 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            d="M16.707 5.293a1 1 0 00-1.414 0L8 12.586l-3.293-3.293a1 1 0 00-1.414 1.414l4 4a1 1 0 001.414 0l8-8a1 1 0 000-1.414z" />
+                    </svg>
+                    <div class="ms-3 text-sm font-medium">
+                        عملیات با موفقیت انجام شد!
+                    </div>
+                    <button onclick="hideAlert(this.parentNode)" type="button"
+                        class="ms-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700"
+                        data-dismiss-target="#alert-border-2" aria-label="Close">
+                        <span class="sr-only">Dismiss</span>
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
+                    </button>
+                </div>
+
+
+
+            </div>
+
+
+            <!-- Header -->
+            <header class="flex justify-between flex-row items-center mb-5 p-5">
+                <h1 class="text-3xl text-dark-text-Primary"><i class="fa fa-comment ml-3"></i>کاربران</i>
+                </h1>
+            </header>
+
+            <!-- Table -->
+            <section class="flex-1 overflow-hidden rounded-2xl">
+                <div class="h-full overflow-y-auto space-y-5 p-5">
+                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg bg-light-text-Primary">
+
+                        <div id="search"
+                            class="flex flex-row items-center text-center bg-light-text-soft h-8 w-52 rounded-md px-2 my-3 mr-3">
+                            <input type="text" oninput="search(this.value)" placeholder="جستوجو..."
+                                class="w-44 text-right h-full px-2 outline-none border-none placeholder:text-right">
+                            <i class="fa fa-search w-5"></i>
+                        </div>
+
+
+                        <table dir="rtl" class="w-full text-sm text-left rtl:text-right text-gray-500">
+                            <thead class="text-sm text-center uppercase bg-sky-900 text-white">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3">ای دی</th>
+                                    <th scope="col" class="px-6 py-3">نام کاربری</th>
+                                    <th scope="col" class="px-6 py-3">ایمیل</th>
+                                    <th scope="col" class="px-6 py-3">نوع</th>
+                                    <th scope="col" class="px-6 py-3">عملیات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rows">
+                                <!-- Row 1 -->
+                                <tr>
+                                    <th scope="row">101</th>
+                                    <td data-search="on">جواد خان</td>
+                                    <td>dev.javad.mosavian@gmail.com</td>
+                                    <td>ادمین</td>
+                                    <td class="px-2 w-72 py-4">
+                                        <div class="flex text-center justify-center items-center gap-2">
+                                            <a href="#edite" class="bg-green-500 admin-table-btn td-action">تغییر
+                                                نوع</a>
+                                            <form method="post"><button
+                                                    class="bg-red-500 admin-table-btn td-action">حذف</button></form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">101</th>
+                                    <td data-search="on">رضا</td>
+                                    <td>reza@gmail.com</td>
+                                    <td>کاربر</td>
+                                    <td class="px-2 w-72 py-4">
+                                        <div class="flex text-center justify-center items-center gap-2">
+                                            <a href="#edite" class="bg-green-500 admin-table-btn td-action">تغییر
+                                                نوع</a>
+                                            <form method="post"><button
+                                                    class="bg-red-500 admin-table-btn td-action">حذف</button></form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h3 id="noResult" class="hidden text-center mx-auto text-lg text-red-600 my-2">چیزی پیدا نشد
+                        </h3>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+
+    <div id="view"
+        class="hidden flex justify-center items-center flex-col gap-5 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-white rounded-2xl p-3 shadow-[0_0_15px_5px] shadow-black/30 ">
+        <div class="w-full"><button onclick="closeView()" class="cursor-pointer"><i class="fa fa-close"></i></button>
+        </div>
+        <img class="w-full flex-1 object-cover rounded-2xl"
+            src="../assets/images/church_in_stanford-wallpaper-960x540.jpg" alt="">
+
+    </div>
+
+    <script src="../assets/scripts/align-inputs.js"></script>
+    <script src="../assets/scripts/search.js"></script>
+    <script src="../assets/scripts/view.js"></script>
+    <script src="../assets/scripts/alert.js"></script>
+</body>
+
+</html>

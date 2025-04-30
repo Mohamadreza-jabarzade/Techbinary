@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fa" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <title>فرم ورود</title>
+</head>
+
+<body dir="rtl">
+    <div class="h-[100svh] w-full flex flex-col md:flex-row">
+        <div class="auth-right">
+            <img src="../Logo.png" alt="TechBinary" class="w-32 md:w-36 lg:w-44  md:pb-10">
+            <h2 class="text-2xl text-center text-light-text-Primary hidden md:block"> دنیای تکنولوژی رو با ما کشف کن.</h2>
+            <span class="text-base text-center text-light-text-soft hidden md:block">وارد شو و جدیدترین مطالب دنیای تکنولوژی رو از دست نده!</span>
+        </div>
+        <aside class="auth-aside">
+
+            <form action="" method="post" class="md:flex-1 w-4/5 flex flex-col gap-3 justify-center">
+
+                <h1 class="text-my-second text-lg font-medium">ورود به حساب کاربری</h1>
+                <input class="auth-input" type="email" placeholder="ایمیل خود را وارد کنید" required>
+                <input class="auth-input" type="password" name="" placeholder="رمز عبور خود را وارد کنید" required>
+                <div class="w-full flex justify-end">
+                    <button class="auth-btn"><span>ورود</span><i class="fa fa-angle-left absolute left-3"></i></button>
+                </div>
+                <a href="./forget.html" class="text-center text-sm mt-3 text-dark-text-soft opacity-70">فراموشی رمز عبور</a>
+                <a href="./signup.html" class="text-center text-sm mt-3 text-dark-text-soft opacity-70">عضو نیستید؟ ثبت نام کنید</a>
+            </form>
+
+            <footer class="mt-auto w-full h-10 text-2xl flex justify-between items-center px-10 text-center space-x-3">
+                <div class="icons space-x-3">
+                    <a href=""><i class="fab fa-instagram"></i></a>
+                    <a href=""><i class="fab fa-telegram"></i></a>
+                </div>
+                <a href="../index.html" class="text-sm font-medium">صفحه اصلی</a>
+                
+            </footer>
+        </aside>
+    </div>
+    <script src="../assets/scripts/align-inputs.js"></script>
+</body>
+
+</html>
