@@ -4,7 +4,7 @@
 @section('title', 'خانه')
 
 @section('content')
-    
+
     <!-- hero -->
     <section id="hero" class="w-full h-[350px] relative bg-[url(../images/1.jpg)] bg-cover bg-center">
 
@@ -38,7 +38,7 @@
                             <div
                                 class="w-72 h-92 bg-white rounded-3xl  overflow-hidden hover:scale-105 duration-300 relative">
                                 <img class="object-cover h-full w-full"
-                                    src="/assets/images/church_in_stanford-wallpaper-960x540.jpg" alt="">
+                                    src="/images/church_in_stanford-wallpaper-960x540.jpg" alt="">
                                 <a href="#"
                                     class="w-full h-1/3 bg-gradient-to-t from-black via-black to-black/60 z-10 absolute bottom-0 flex flex-col px-4 py-3">
                                     <h3 class="text-light-text-Primary text-xl mb-3 font-bold">عنوان</h3>
@@ -52,7 +52,7 @@
                         <div class="swiper-slide">
                             <div
                                 class="w-72 h-92 bg-white rounded-3xl  overflow-hidden hover:scale-105 duration-300 relative">
-                                <img class="object-cover h-full w-full" src="/assets/images/1.jpg" alt="">
+                                <img class="object-cover h-full w-full" src="/images/1.jpg" alt="">
                                 <a href="#"
                                     class="w-full h-1/3 bg-gradient-to-t from-black via-black to-black/60 z-10 absolute bottom-0 flex flex-col px-4 py-3">
                                     <h3 class="text-light-text-Primary text-xl mb-3 font-bold">عنوان</h3>
@@ -66,7 +66,7 @@
                         <div class="swiper-slide">
                             <div
                                 class="w-72 h-92 bg-white rounded-3xl  overflow-hidden hover:scale-105 duration-300 relative">
-                                <img class="object-cover h-full w-full" src="/assets/images/image-4 1.png" alt="">
+                                <img class="object-cover h-full w-full" src="/images/image-4 1.png" alt="">
                                 <a href="#"
                                     class="w-full h-1/3 bg-gradient-to-t from-black via-black to-black/60 z-10 absolute bottom-0 flex flex-col px-4 py-3">
                                     <h3 class="text-light-text-Primary text-xl mb-3 font-bold">عنوان</h3>
