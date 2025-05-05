@@ -19,12 +19,19 @@
         <!-- searchEnd -->
 
 
-        <!-- auth -->
-        <div class="flex gap-2 items-center">
-            <a class="px-3 pb-1 text-dark-text-Primary text-lg" href="./auth/signin.html">ورود</a>
-            <a class="rounded-2xl bg-my-second text-light-text-Primary px-3 py-1 font-bold text-md" href="./auth/signup.html">ثبت نام</a>
-        </div>
-        <!-- authEnd -->
+        @guest()
+            <!-- auth -->
+            <div class="flex gap-2 items-center">
+                <a class="px-3 pb-1 text-dark-text-Primary text-lg" href="{{route('showLogin')}}">ورود</a>
+                <a class="rounded-2xl bg-my-second text-light-text-Primary px-3 py-1 font-bold text-md" href="{{route('showRegister')}}">ثبت نام</a>
+            </div>
+            <!-- authEnd -->
+        @endguest
+        @auth()
+            <div class="flex gap-2 items-center">
+                <a class="rounded-md border-2 border-solid border-indigo-500 bg-white px-4 py-2 text-sm font-semibold text-gray-700 dark:border-sky-500 dark:bg-gray-700 dark:text-white" href="#">{{auth()->user()->username}} &nbsp; <i class="fa-solid fa-user"></i></a>
+            </div>
+        @endauth
 
     </header>
     <!-- headerEnd -->
