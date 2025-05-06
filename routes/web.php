@@ -2,15 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\AdminController;
 
 Route::view('/','index')->name('showHome');
-Route::view('/admin','admin.dashboard')->name('showDashboard');
-Route::view('/admin/posts','admin.posts')->name('showPosts');
-Route::view('/admin/posts/new','admin.newPost')->name('showNewPost');
-Route::view('/admin/categories','admin.categories')->name('showCategories');
-Route::view('/admin/categories/manage','admin.categoryManage')->name('showCategoryManage');
-Route::view('/admin/comments','admin.comments')->name('showComments');
-Route::view('/admin/users','admin.users')->name('showUsers');
+
 Route::view('/login','auth.login')->name('showLogin');
 Route::view('/register','auth.register')->name('showRegister');
 Route::view('/forgot','auth.forgot')->name('showForgot');
@@ -28,4 +24,18 @@ Route::get('/register/verify', [AuthController::class, 'showVerifyForm'])->name(
 Route::get('/register/verify/resend', [AuthController::class, 'resendVerifyCode'])->name('resendVerifyCode');
 
 Route::post('/login',[AuthController::class, 'login'])->name('login');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/load/posts', [PostController::class, 'loadPosts'])->name('loadPosts');
+Route::POST('/post/like', [PostController::class, 'likePost'])->name('likePost');
+
+Route::prefix('admin')->group(function () {
+        Route::controller(AdminController::class)->group(function () {
+            Route::get('/dashboard', 'showDashboard')->name('showDashboard');
+            Route::get('/Categories', 'showCategories')->name('showCategories');
+            Route::get('/Posts', 'showPosts')->name('showPosts');
+            Route::get('/Comments', 'showComments')->name('showComments');
+            Route::get('/Users', 'showUsers')->name('showUsers');
+        });
+});
+
 

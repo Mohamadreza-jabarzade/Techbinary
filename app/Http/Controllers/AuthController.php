@@ -14,6 +14,15 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    public function logout(Request $request)
+    {
+        Auth::logout(); // 👈 لاگ‌اوت کردن کاربر
+
+        $request->session()->invalidate(); // 👈 بی‌اعتبار کردن سشن فعلی
+        $request->session()->regenerateToken(); // 👈 ایجاد توکن CSRF جدید
+
+        return redirect()->route('showLogin'); // 👈 انتقال به صفحه ورود
+    }
     public function login(loginFormRequest $request)
     {
         $credentials = $request->only('email', 'password');

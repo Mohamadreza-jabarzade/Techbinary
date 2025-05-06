@@ -31,6 +31,12 @@
             <div class="flex gap-2 items-center">
                 <a class="rounded-md border-2 border-solid border-indigo-500 bg-white px-4 py-2 text-sm font-semibold text-gray-700 dark:border-sky-500 dark:bg-gray-700 dark:text-white" href="#">{{auth()->user()->username}} &nbsp; <i class="fa-solid fa-user"></i></a>
             </div>
+            <div class="flex items-center">
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="rounded-md border-2 border-solid border-red-500 bg-white px-4 py-2 text-sm font-semibold text-gray-700  dark:bg-gray-700 dark:text-white" href="{{route('logout')}}"> <i style="color: red" class=" fa-solid fa-right-from-bracket"></i></button>
+                </form>
+            </div>
         @endauth
 
     </header>

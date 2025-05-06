@@ -1,20 +1,21 @@
-const url = "https://mocki.io/v1/7cb75a23-a869-4b9d-b35b-5246c3fd318e";
+const url = "http://127.0.0.1:8000/post/like";
 
 function _like(elem) {
     const parent = elem.parentNode;
-    const id = parent.getAttribute("data-postId")
-    console.log(id + " : " + elem.checked);
+    const id = parent.getAttribute("data-postId");
+    const _token = parent.getElementsByName('_token').values();
+    console.log(_token);
 
     const xhr = new XMLHttpRequest();
     xhr.open("POST", url);
 
     xhr.onreadystatechange = () => {
         if (xhr.status === 200 && xhr.readyState === 4) {
-            console.log("done !");
+            console.log(xhr.response);
         } else {
-            console.log("error : " + xhr.status);
+            console.log(xhr.response);
         }
     };
 
-    xhr.send(`id=${id}`);
+    xhr.send(`id=${id},checked=${elem.checked}`);
 }
