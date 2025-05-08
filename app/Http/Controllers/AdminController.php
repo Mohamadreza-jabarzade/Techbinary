@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
@@ -15,7 +16,8 @@ class AdminController extends Controller
     }
     public function showCategories()
     {
-        return view('admin.categories');
+        $categories = Category::withCount('posts')->addSelect('id', 'name', 'status')->get();
+        return view('admin.categories', compact('categories'));
     }
 
     public function showCategoryManage()
@@ -24,7 +26,7 @@ class AdminController extends Controller
     }
     public function showPosts()
     {
-        $posts = Post::select('id', 'title','category','image','writer','view','status')->get();
+        $posts = Post::withCount('comments')->addSelect('id', 'title','category','image','writer','view','status')->get();
         return view('admin.posts',compact('posts'));
     }
 

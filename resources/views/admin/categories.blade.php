@@ -42,62 +42,23 @@
                         </tr>
                         </thead>
                         <tbody id="rows">
-                        <!-- Row 1 -->
+                        @foreach($categories as $category)
                         <tr>
-                            <th scope="row">101</th>
-                            <td data-search="on" class=" search">پی اچ پی</td>
-                            <td class="">24</td>
-                            <td class=" text-red-500">غیرفعال</td>
+                            <th scope="row">{{$category->id}}</th>
+                            <td data-search="on" class="search">{{$category->name}}</td>
+                            <td>{{$category->posts_count}}</td>
+                            <td class="{{ $category->status == 'active' ? 'text-green-500' : 'text-red-500' }}">
+                                {{ $category->status == 'active' ? 'فعال' : 'غیرفعال' }}
+                            </td>
                             <td class="px-2 w-72 py-4">
                                 <div class="flex text-center justify-center items-center gap-2">
-                                    <a href="{{route('showCategoryManage','#101')}}" class="bg-sky-500 admin-table-btn td-action">ویرایش</a>
-                                    <form method="post"><button
-                                            class="bg-green-500 admin-table-btn td-action">تغییر
-                                            وضعیت</button></form>
-                                    <form method="post"><button
-                                            class="bg-red-500 admin-table-btn td-action">حذف</button>
-                                    </form>
+                                    <a href="{{route('showCategoryManage','#'.$category->id)}}" class="bg-sky-500 admin-table-btn td-action">ویرایش</a>
+                                    <form method="post"><button class="bg-green-500 admin-table-btn td-action">تغییر وضعیت</button></form>
+                                    <form method="post"><button class="bg-red-500 admin-table-btn td-action">حذف</button></form>
                                 </div>
                             </td>
                         </tr>
-
-                        <!-- Row 2 -->
-                        <tr>
-                            <th scope="row">102</th>
-                            <td data-search="on" class=" search">جاوا اسکریپت</td>
-                            <td class="">82</td>
-                            <td class=" text-green-600">فعال</td>
-                            <td class="px-2 py-4">
-                                <div class="flex text-center justify-center items-center gap-2">
-                                    <a href="./category-manage.html#102" class="bg-sky-500 admin-table-btn td-action">ویرایش</a>
-                                    <form method="post"><button
-                                            class="bg-green-500 admin-table-btn td-action">تغییر
-                                            وضعیت</button></form>
-                                    <form method="post"><button
-                                            class="bg-red-500 admin-table-btn td-action">حذف</button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <th scope="row">102</th>
-                            <td data-search="on">سلام</td>
-                            <td>82</td>
-                            <td class="text-green-600">فعال</td>
-                            <td class="px-2 py-4">
-                                <div class="admin-table-btn-parent">
-                                    <a href="./category-manage.html#102" class="bg-sky-500 admin-table-btn td-action">ویرایش</a>
-                                    <form method="post"><button
-                                            class="bg-green-500 admin-table-btn td-action">تغییر
-                                            وضعیت</button></form>
-                                    <form method="post"><button
-                                            class="bg-red-500 admin-table-btn td-action">حذف</button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
-
+                        @endforeach
                         </tbody>
                     </table>
                     <h3 id="noResult" class="hidden text-center mx-auto text-lg text-red-600 my-2">چیزی پیدا نشد

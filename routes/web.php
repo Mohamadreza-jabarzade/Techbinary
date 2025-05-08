@@ -13,7 +13,7 @@ Route::view('/login','auth.login')->name('showLogin');
 Route::view('/register','auth.register')->name('showRegister');
 Route::view('/forgot','auth.forgot')->name('showForgot');
 Route::view('/forgot/email/check','auth.forgotEmail')->name('showForgotEmailCheck');
-Route::view('/forgot/new','auth.forgotNew')->name('showForgotNew');
+Route::view('/forgot/new','auth.forgot')->name('showForgotNew');
 
 
 Route::post('/register/email/check',[AuthController::class, 'registerEmailCheck'])->name('RegisterEmailCheck');
