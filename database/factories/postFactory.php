@@ -24,7 +24,7 @@ class postFactory extends Factory
             'body' => $faker->realText(300), // متن طولانی‌تر برای بدنه
             'writer' => $faker->name(), // مثل: "زهرا محمدی"
             'date' => $faker->numberBetween(1, 10) . ' روز پیش', // مثل: "۳ روز پیش"
-            'category' => $faker->randomElement(['فرانت‌اند', 'بک‌اند', 'دیتابیس', 'DevOps']), // دسته‌بندی‌های رایج
+            'category_id' => $faker->numberBetween(1, 3), // فرض بر این است که ۳ دسته داریم
             'read' => 'خواندن ' . $faker->numberBetween(1, 10) . ' دقیقه', // مثل: "خواندن ۳ دقیقه"
             'image' => 'https://placehold.co/600x500?text=' . $faker->word() . '&random=' . $faker->unique()->numberBetween(1, 10000),
             'status' => $this->faker->randomElement(['draft', 'published']),

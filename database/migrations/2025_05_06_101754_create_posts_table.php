@@ -17,7 +17,8 @@ return new class extends Migration
             $table->text('body');
             $table->string('writer');
             $table->string('date');
-            $table->string('category');
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->string('read');
             $table->string('image')->nullable();
             $table->enum('status', ['draft', 'published'])->default('draft');

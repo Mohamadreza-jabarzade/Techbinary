@@ -17,10 +17,9 @@ class categoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
+            'name' => $this->faker->word(),
             'status' => $this->faker->randomElement(['active', 'inactive']),
             'created_at' => $this->faker->date(),
-
         ];
     }
 }

@@ -11,7 +11,7 @@ class Category extends Model
 
     // اضافه کردن رابطه دستی با پست‌ها بر اساس فیلد category (string)
     public function posts()
-    {
-        return $this->hasMany(Post::class, 'category', 'name');
-    }
+{
+    return $this->hasMany(Post::class, 'category_id');
+}
 }

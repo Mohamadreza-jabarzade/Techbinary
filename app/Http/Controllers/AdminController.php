@@ -26,7 +26,7 @@ class AdminController extends Controller
     }
     public function showPosts()
     {
-        $posts = Post::withCount('comments')->addSelect('id', 'title','category','image','writer','view','status')->get();
+        $posts = Post::withCount('comments')->addSelect('id', 'title','category_id','image','writer','view','status')->get();
         return view('admin.posts',compact('posts'));
     }
 
