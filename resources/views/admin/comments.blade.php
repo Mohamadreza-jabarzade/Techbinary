@@ -36,34 +36,30 @@
                             <th scope="col" class="px-6 py-3">نویسنده</th>
                             <th scope="col" class="px-6 py-3">متن</th>
                             <th scope="col" class="px-6 py-3">پست</th>
-                            <th scope="col" class="px-6 py-3">عنوان</th>
+                            <th scope="col" class="px-6 py-3">تاریخ</th>
                             <th scope="col" class="px-6 py-3">عملیات</th>
                         </tr>
                         </thead>
                         <tbody id="rows">
                         <!-- Row 1 -->
-                        <tr>
-                            <th scope="row">101</th>
-                            <td>جواد خان</td>
-                            <td data-search="on">به نظرم خوبه</td>
-                            <td class="max-w-40">
-                                <p class="truncate max-w-32">Lorem ipsum dolor sit amet consectetur adipiscing
-                                    elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id
-                                    cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna
-                                    tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis
-                                    massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel
-                                    class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos
-                                    himenaeos.</p>
-                            </td>
-                            <td>چی بزارم؟</td>
-                            <td class="px-2 w-72 py-4">
-                                <div class="flex text-center justify-center items-center gap-2">
-                                    <a href="#edite" class="bg-sky-500 admin-table-btn td-action">مشاهده</a>
-                                    <form method="post"><button
-                                            class="bg-red-500 admin-table-btn td-action">حذف</button> </form>
-                                </div>
-                            </td>
-                        </tr>
+                        @foreach($comments as $comment)
+                            <tr>
+                                <th scope="row">{{$comment->id}}</th>
+                                <td>{{$comment->author}}</td>
+                                <td data-search="on">{{$comment->content}}</td>
+                                <td class="max-w-40">
+                                    <p class="truncate max-w-32">{{ $comment->post->title ?? 'عنوان یافت نشد' }}</p>
+                                </td>
+                                <td>{{$comment->created_at}}</td>
+                                <td class="px-2 w-72 py-4">
+                                    <div class="flex text-center justify-center items-center gap-2">
+                                        <a href="#edite" class="bg-sky-500 admin-table-btn td-action">مشاهده</a>
+                                        <form method="post"><button
+                                                class="bg-red-500 admin-table-btn td-action">حذف</button> </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                     <h3 id="noResult" class="hidden text-center mx-auto text-lg text-red-600 my-2">چیزی پیدا نشد

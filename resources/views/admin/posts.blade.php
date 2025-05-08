@@ -36,7 +36,7 @@
                         <thead class="text-sm text-center uppercase bg-sky-900 text-white">
                         <tr>
                             <th scope="col" class="px-6 py-3">ای دی</th>
-                            <th scope="col" class="px-6 py-3">نام</th>
+                            <th scope="col" class="px-6 py-3">عنوان</th>
                             <th scope="col" class="px-6 py-3">دسته بندی</th>
                             <th scope="col" class="px-6 py-3">پوستر</th>
                             <th scope="col" class="px-6 py-3">نویسنده</th>
@@ -48,54 +48,9 @@
                         </thead>
                         <tbody id="rows">
                         <!-- Row 1 -->
-                        <tr>
-                            <th scope="row">101</th>
-                            <td data-search="on">پی اچ پی</td>
-                            <td>دسته بندی</td>
-                            <td class="flex-1 min-w-32 flex justify-center items-center"><img
-                                    onclick="openView(this.src)"
-                                    class="w-full h-20 object-cover cursor-pointer rounded-md"
-                                    src="/images/image-4 1.png" alt=""></td>
-                            <td>جواد خان</td>
-                            <td>24</td>
-                            <td>24</td>
-                            <td class=" text-red-500">غیرفعال</td>
-                            <td class="px-2 w-72 py-4">
-                                <div class="flex text-center justify-center items-center gap-2">
-                                    <a href="#edite" class="bg-sky-500 admin-table-btn td-action">ویرایش</a>
-                                    <form method="post"><button
-                                            class="bg-green-500 admin-table-btn td-action">تغییر
-                                            وضعیت</button></form>
-                                    <form method="post"><button
-                                            class="bg-red-500 admin-table-btn td-action">حذف</button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">101</th>
-                            <td data-search="on">پی اچ پی</td>
-                            <td>دسته بندی</td>
-                            <td class="flex-1 min-w-32 flex justify-center items-center"><img
-                                    onclick="openView(this.src)"
-                                    class="w-full h-20 object-cover cursor-pointer rounded-md"
-                                    src="/images/church_in_stanford-wallpaper-960x540.jpg" alt=""></td>
-                            <td>جواد خان</td>
-                            <td>24</td>
-                            <td>24</td>
-                            <td class=" text-red-500">غیرفعال</td>
-                            <td class="px-2 w-72 py-4">
-                                <div class="flex text-center justify-center items-center gap-2">
-                                    <a href="#edite" class="bg-sky-500 admin-table-btn td-action">ویرایش</a>
-                                    <form method="post"><button
-                                            class="bg-green-500 admin-table-btn td-action">تغییر
-                                            وضعیت</button></form>
-                                    <form method="post"><button
-                                            class="bg-red-500 admin-table-btn td-action">حذف</button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
+                        @foreach($posts as $post)
+
+                        @endforeach
                         </tbody>
                     </table>
                     <h3 id="noResult" class="hidden text-center mx-auto text-lg text-red-600 my-2">چیزی پیدا نشد

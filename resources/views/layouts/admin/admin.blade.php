@@ -19,6 +19,9 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/scripts/chart.js"></script>
     <script src="/scripts/alert.js"></script>
+    <script src="/scripts/search.js"></script>
+    <script src="/scripts/view.js"></script>
+
     @yield('customScripts')
 </body>
 

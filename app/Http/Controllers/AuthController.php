@@ -38,13 +38,18 @@ class AuthController extends Controller
     }
     public function createAccount(CreateAccountForm $createAccountForm)
     {
-        User::create([
+        $user_created = User::create([
             'username' => $createAccountForm->username,
             'password' => bcrypt(request('password')),
             'email' => session('email_for_verification'),
             'email_verified_at' => Carbon::now(),
         ]);
-        return redirect()->route('showHome')->with('message', 'Your account has been created.');
+        if ($user_created) {
+            Auth::login($user_created);
+            return redirect()->route('showHome');
+        }
+        return back()->with('error','server error');
+
     }
     public function showCreateAccount()
     {

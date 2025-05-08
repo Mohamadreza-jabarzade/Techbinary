@@ -1,8 +1,6 @@
 <!-- filepath: resources/views/index.blade.php -->
 @extends('layouts.app')
-
 @section('title', 'خانه')
-
 @section('content')
 
     <!-- hero -->
@@ -26,6 +24,9 @@
     <section class="containe md:flex-row-reverse flex flex-col md:gap-2 lg:gap-10 ">
 
         @include('partials.aside')
+{{--        @isset($likedPostIds)--}}
+{{--            {{var_dump($likedPostIds)}}--}}
+{{--        @endif--}}
         <main id="main" class="w-full relative pb-24 px-2 md:px-5 lg:px-8 md:w-2/3 flex flex-col md:py-10 divide-black/10 divide-y-[1px]">
             <button id="btn-up" onclick="window.scrollTo(0,0);" class="btn-up hidden"><i class="fa fa-arrow-up"></i></button>
             <div class="w-full max-w-5xl mx-auto py-2 md:py-5 h-[600px] px-4">
@@ -88,126 +89,20 @@
                     onclick="load()">بیشتر</button>
             </div>
 
-
-
-
         </main>
     </section>
 @endsection
 
 @section('scripts')
-<script>
-    AOS.init({
-        once: true,
-        duration: 1000,
-        easing: 'ease-out-back'
-    });
-    const main = document.getElementById("main");
-    const aside = document.getElementById("aside");
-    const btnUp = document.getElementById("btn-up");
-    const bottomOffset = 500;
-    const _url = "http://127.0.0.1:8000/load/posts";
-    var loaded = false;
-    const clientHeight = window.innerHeight;
-    document.onscroll = () => {
-
-        const clientPosition = window.scrollY;
-        const pageHight = document.documentElement.scrollHeight;
-
-        if(2000 <= clientPosition && btnUp.classList.contains("hidden")){
-            btnUp.classList.add("fixed");
-            btnUp.classList.remove("hidden");
-        }else if(2000 >= clientPosition && btnUp.classList.contains("fixed")){
-            btnUp.classList.add("hidden");
-            btnUp.classList.remove("fixed");
-        }
-
-        if ((pageHight - clientHeight - bottomOffset) <= clientPosition && !loaded) {
-            load();
-        }
-
-
-
-    };
-
-    function load() {
-        loaded = true;
-        const xhr = new XMLHttpRequest();
-        xhr.open("GET", _url);
-        xhr.onreadystatechange = () => {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                let response = xhr.responseText;
-                setTimeout(() => {
-                    loaded = false;
-                }, 1000);
-                create(JSON.parse(response));
-            }
-        };
-        xhr.send();
-    }
-
-
-
-
-    function create(response) {
-        response.forEach((elem) => {
-
-
-
-
-            let item =
-                `
-        <div class="post-wrapper" data-aos="zoom-in-up">
-                        <!-- Left Content -->
-                        <div class="post-left">
-
-                            <!-- Top Section -->
-                            <div class="post-author">
-                                <img src="images/images1.png" alt="Author" class="post-author-img" />
-                                <span class="post-author-text"> ${elem.writer} | ${elem.date}  </span>
-                            </div>
-
-                            <!-- Main Content -->
-                            <a href="#" class="post-content group">
-                                <h1 class="post-title">${elem.title}</h1>
-                                <p class="post-excerpt truncate">
-                                ${elem.body}
-                                </p>
-                            </a>
-
-                            <!-- Bottom Section -->
-                            <div class="post-footer">
-                                <span class="text-sm">
-                                    <a href="#" class="post-tag">${elem.category}</a> | ${elem.read}
-                                </span>
-                                <label class="cursor-pointer" data-postid="${elem.id}">
-                                @csrf
-                                <span>${elem.likes_count}</span> &nbsp; <span>${elem.view}</span>
-                                    <input type="checkbox" name="like" onchange="_like(this)" class="like-checkbox peer" />
-                                    <div class="like-icon-wrapper">
-                                        <i class="like-icon fa fa-heart"></i>
-                                    </div>
-
-                                </label>
-                            </div>
-                        </div>
-
-                        <!-- Image Preview -->
-                        <a href="#" class="post-thumbnail-link">
-                            <img src="${elem.image}" alt="Post Thumbnail" class="post-thumbnail-img" />
-                        </a>
-                    </div>
-            `;
-            main.insertAdjacentHTML('beforeend', item);
-
-
+    <script>
+        AOS.init({
+            once: true,
+            duration: 1000,
+            easing: 'ease-out-back'
         });
+    </script>
+    <script src="/scripts/like.js"></script>
+    <script src="/scripts/load-posts.js"></script>
 
 
-
-    }
-
-    load();
-
-</script>
 @endsection

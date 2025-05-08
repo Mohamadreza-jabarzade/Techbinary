@@ -41,34 +41,22 @@
                         </thead>
                         <tbody id="rows">
                         <!-- Row 1 -->
-                        <tr>
-                            <th scope="row">101</th>
-                            <td data-search="on">جواد خان</td>
-                            <td>dev.javad.mosavian@gmail.com</td>
-                            <td>ادمین</td>
-                            <td class="px-2 w-72 py-4">
-                                <div class="flex text-center justify-center items-center gap-2">
-                                    <a href="#edite" class="bg-green-500 admin-table-btn td-action">تغییر
-                                        نوع</a>
-                                    <form method="post"><button
-                                            class="bg-red-500 admin-table-btn td-action">حذف</button></form>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">101</th>
-                            <td data-search="on">رضا</td>
-                            <td>reza@gmail.com</td>
-                            <td>کاربر</td>
-                            <td class="px-2 w-72 py-4">
-                                <div class="flex text-center justify-center items-center gap-2">
-                                    <a href="#edite" class="bg-green-500 admin-table-btn td-action">تغییر
-                                        نوع</a>
-                                    <form method="post"><button
-                                            class="bg-red-500 admin-table-btn td-action">حذف</button></form>
-                                </div>
-                            </td>
-                        </tr>
+                        @foreach($users as $user)
+                            <tr>
+                                <th scope="row">{{$user->id}}</th>
+                                <td data-search="on">{{$user->username}}</td>
+                                <td>{{$user->email}}</td>
+                                <td>{{$user->role == 'user' ? 'کاربر' : 'ادمین'}}</td>
+                                <td class="px-2 w-72 py-4">
+                                    <div class="flex text-center justify-center items-center gap-2">
+                                        <a href="#edite" class="bg-green-500 admin-table-btn td-action">تغییر
+                                            نوع</a>
+                                        <form method="post"><button
+                                                class="bg-red-500 admin-table-btn td-action">حذف</button></form>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                     <h3 id="noResult" class="hidden text-center mx-auto text-lg text-red-600 my-2">چیزی پیدا نشد

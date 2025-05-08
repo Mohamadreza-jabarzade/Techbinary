@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -14,17 +17,33 @@ class AdminController extends Controller
     {
         return view('admin.categories');
     }
+
+    public function showCategoryManage()
+    {
+        return view('admin.categoryManage');
+    }
     public function showPosts()
     {
-        return view('admin.posts');
+        $posts = Post::select('id', 'title','category','image','writer','view','status')->get();
+        return view('admin.posts',compact('posts'));
+    }
+
+    public function showNewPost()
+    {
+        return view('admin.newPost');
     }
     public function showComments()
     {
-        return view('admin.comments');
+        $comments = Comment::with('post:id,title')
+            ->select('id','author','content','post_id','created_at')
+            ->orderBy('created_at','DESC')
+            ->get();
+        return view('admin.comments',compact('comments'));
     }
     public function showUsers()
     {
-        return view('admin.users');
+        $users = User::select('id','username','email','role')->get();
+        return view('admin.users',compact('users'));
     }
 
 }

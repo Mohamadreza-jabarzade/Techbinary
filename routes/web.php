@@ -4,8 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LikeController;
+use App\Http\Controllers\HomeController;
 
-Route::view('/','index')->name('showHome');
+Route::get('/',[HomeController::class,'showHome'])->name('showHome');
 
 Route::view('/login','auth.login')->name('showLogin');
 Route::view('/register','auth.register')->name('showRegister');
@@ -26,16 +28,20 @@ Route::get('/register/verify/resend', [AuthController::class, 'resendVerifyCode'
 Route::post('/login',[AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/load/posts', [PostController::class, 'loadPosts'])->name('loadPosts');
-Route::POST('/post/like', [PostController::class, 'likePost'])->name('likePost');
+Route::POST('/like/post', [LikeController::class, 'postLike'])->name('postLike');
 
 Route::prefix('admin')->group(function () {
         Route::controller(AdminController::class)->group(function () {
+            Route::get('', 'showDashboard');
             Route::get('/dashboard', 'showDashboard')->name('showDashboard');
-            Route::get('/Categories', 'showCategories')->name('showCategories');
-            Route::get('/Posts', 'showPosts')->name('showPosts');
-            Route::get('/Comments', 'showComments')->name('showComments');
-            Route::get('/Users', 'showUsers')->name('showUsers');
+            Route::get('/categories', 'showCategories')->name('showCategories');
+            Route::get('/categories/manage', 'showCategoryManage')->name('showCategoryManage');
+            Route::get('/posts', 'showPosts')->name('showPosts');
+            Route::get('/posts/new', 'showNewPost')->name('showNewPost');
+            Route::get('/comments', 'showComments')->name('showComments');
+            Route::get('/users', 'showUsers')->name('showUsers');
         });
 });
+
 
 
