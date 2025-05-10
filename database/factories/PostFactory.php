@@ -20,7 +20,7 @@ class postFactory extends Factory
         $faker = \Faker\Factory::create('fa_IR');
 
         return [
-            'title' => $faker->realText(30), // مثلاً: "معرفی Tailwind CSS"
+            'title' => $faker->realText(60), // مثلاً: "معرفی Tailwind CSS"
             'body' => $faker->realText(300), // متن طولانی‌تر برای بدنه
             'writer' => $faker->name(), // مثل: "زهرا محمدی"
             'date' => $faker->numberBetween(1, 10) . ' روز پیش', // مثل: "۳ روز پیش"

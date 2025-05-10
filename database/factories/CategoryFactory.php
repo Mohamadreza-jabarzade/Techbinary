@@ -17,7 +17,7 @@ class categoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->word(),
+            'name' => $this->faker->randomElement(['تکنولوژی', 'برنامه نویسی','ویندوز']),
             'status' => $this->faker->randomElement(['active', 'inactive']),
             'created_at' => $this->faker->date(),
         ];

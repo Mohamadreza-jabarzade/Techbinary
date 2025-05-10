@@ -40,6 +40,8 @@ Route::prefix('admin')->group(function () {
             Route::get('/posts/new', 'showNewPost')->name('showNewPost');
             Route::get('/comments', 'showComments')->name('showComments');
             Route::get('/users', 'showUsers')->name('showUsers');
+            Route::delete('/users/delete', 'userDelete')->name('userDelete');
+            Route::patch('/users/change/role', 'userRoleChange')->name('userRoleChange');
         });
 });
 

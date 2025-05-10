@@ -49,10 +49,21 @@
                                 <td>{{$user->role == 'user' ? 'کاربر' : 'ادمین'}}</td>
                                 <td class="px-2 w-72 py-4">
                                     <div class="flex text-center justify-center items-center gap-2">
-                                        <a href="#edite" class="bg-green-500 admin-table-btn td-action">تغییر
-                                            نوع</a>
-                                        <form method="post"><button
-                                                class="bg-red-500 admin-table-btn td-action">حذف</button></form>
+                                        <form method="post" action="{{route('userRoleChange')}}">
+                                            @method('PATCH')
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{$user->id}}">
+                                        <button class="bg-green-500 admin-table-btn td-action">تغییر
+                                            نوع</button>
+                                        </form>
+
+                                        <form method="post" action="{{route('userDelete')}}">
+                                            @method('DELETE')
+                                            <input type="hidden" name="id" value="{{$user->id}}">
+                                            @csrf
+                                            <button
+                                                type="submit" class="bg-red-500 admin-table-btn td-action">حذف</button>
+                                        </form>
                                     </div>
                                 </td>
                             </tr>

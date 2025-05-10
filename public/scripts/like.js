@@ -2,6 +2,7 @@ var likeUrl = "http://127.0.0.1:8000/like/post";
 var csrfTokenInLike = window.appData.csrf;
 
 function _like(elem) {
+    elem.classList.add("peer");
     const parent = elem.parentNode;
     const parentOfparent = parent.parentNode;
     const id = parent.getAttribute("data-postId");

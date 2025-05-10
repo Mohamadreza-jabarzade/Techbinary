@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\changeUserRoleRequest;
+use App\Http\Requests\deleteUserRequest;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Post;
@@ -17,7 +19,7 @@ class AdminController extends Controller
     public function showCategories()
     {
         $categories = Category::withCount('posts')->addSelect('id', 'name', 'status')->get();
-        return view('admin.categories', compact('categories'));
+        return view('admin.categories', compact( 'categories'));
     }
 
     public function showCategoryManage()
@@ -46,6 +48,33 @@ class AdminController extends Controller
     {
         $users = User::select('id','username','email','role')->get();
         return view('admin.users',compact('users'));
+    }
+
+    public function userDelete(deleteUserRequest $request)
+    {
+        $userDeleted = User::find(request('id'))->delete();
+        if($userDeleted){
+           return back()->with('success','User has been deleted');
+        }
+        else{
+            return back()->with('error','Something went wrong');
+        }
+    }
+
+    public function userRoleChange(changeUserRoleRequest $request)
+    {
+        $user = User::find($request->get('id'));
+        if($user){
+            if ($user->role == 'admin'){
+                $user->role = 'user';
+                return back()->with('success','User role has been Updated');
+            }
+            if ($user->role == 'user'){
+                $user->role = 'admin';
+                return back()->with('success','User role has been Updated');
+            }
+        }
+        return back()->with('error','Something went wrong');
     }
 
 }

@@ -12,7 +12,7 @@
 
         <div class="post-footer">
             <span class="text-sm">
-                <a href="#" class="post-tag">{{ $post->category }}</a> | {{ $post->read }}
+                <a href="#" class="post-tag">{{ $post->category_id }}</a> | {{ $post->read }}
             </span>
             <label class="cursor-pointer" data-postid="{{ $post->id }}">
                 <span class="showLikes">{{ $post->likes_count }}</span> &nbsp; <span>{{ $post->view }}</span>
@@ -20,11 +20,12 @@
                     @if(in_array($post->id, $arr_posts))
                         <input type="checkbox" name="like" checked onchange="_like(this)" class="like-checkbox peer">
                     @else
-                        <input type="checkbox" name="like" onchange="_like(this)" class="like-checkbox peer">
+                        <input type="checkbox" name="like" onchange="_like(this)" class="like-checkbox">
                     @endif
-                @else
-                    <input type="" onclick="error()" class="like-checkbox peer" />
                 @endauth
+                @guest
+                    <input type="checkbox" name="like" onclick="error()" class="like-checkbox" />
+                @endguest
                 <div class="like-icon-wrapper">
                     <i class="like-icon fa fa-heart"></i>
                 </div>

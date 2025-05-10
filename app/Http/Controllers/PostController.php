@@ -7,29 +7,34 @@ use App\Models\Like;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
     public function loadPosts()
     {
-//        $posts = Post::withCount('likes')->get();
-
-//        return response()->json($posts);
-        $userId = auth()->user()->id;
-        $user = User::find($userId);
-        global $postIds;
-        $postIds = $user->likedPosts()->pluck('posts.id');  // خروجی: Collection از idها
-        $arr_posts = $postIds->toArray();
-        $posts = Post::select('id', 'title', 'body', 'writer', 'date', 'category', 'image','read','view')
+        $posts = Post::select('id', 'title', 'body', 'writer', 'date', 'category_id', 'image', 'read', 'view')
             ->withCount('likes')
             ->get();
 
-        $html = '';
-        foreach ($posts as $post) {
-            $html .= view('post', compact('post','arr_posts'))->render();
+        $arr_posts = [];
+
+        if (Auth::check()) {
+            $user = auth()->user();
+            $arr_posts = $user->likedPosts()->pluck('posts.id')->toArray();
         }
 
+        $html = '';
+
+        foreach ($posts as $post) {
+            $html .= view('post', compact('post', 'arr_posts'))->render();
+        }
         return response()->json(['html' => $html]);
+    }
+
+    public function savedPost()
+    {
+        Post::all()->each(function (Post $post) {})
     }
 
 
