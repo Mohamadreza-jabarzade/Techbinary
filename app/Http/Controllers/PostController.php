@@ -34,7 +34,7 @@ class PostController extends Controller
 
     public function savedPost()
     {
-        Post::all()->each(function (Post $post) {})
+        Post::all()->each(function (Post $post) {});
     }
 
 
