@@ -21,6 +21,7 @@ class commentFactory extends Factory
             'content' => $this->faker->text(),
             'post_id' => $this->faker->numberBetween(1, 40),
             'user_id' => $this->faker->numberBetween(1, 40),
+            'status' => $this->faker->randomElement(['approved','pending']),
             'created_at' => $this->faker->date(),
         ];
     }

@@ -36,7 +36,7 @@
                             <th scope="col" class="px-6 py-3">نویسنده</th>
                             <th scope="col" class="px-6 py-3">متن</th>
                             <th scope="col" class="px-6 py-3">پست</th>
-                            <th scope="col" class="px-6 py-3">تاریخ</th>
+                            <th scope="col" class="px-10 py-3">تاریخ</th>
                             <th scope="col" class="px-6 py-3">عملیات</th>
                         </tr>
                         </thead>
@@ -50,12 +50,26 @@
                                 <td class="max-w-40">
                                     <p class="truncate max-w-32">{{ $comment->post->title ?? 'عنوان یافت نشد' }}</p>
                                 </td>
-                                <td>{{$comment->created_at}}</td>
+                                <td>{{$comment->status == 'pending' ? 'در انتظار تایید' : 'تایید شده'}}</td>
                                 <td class="px-2 w-72 py-4">
                                     <div class="flex text-center justify-center items-center gap-2">
-                                        <a href="#edite" class="bg-sky-500 admin-table-btn td-action">مشاهده</a>
-                                        <form method="post"><button
-                                                class="bg-red-500 admin-table-btn td-action">حذف</button> </form>
+                                        @if($comment->status == 'pending')
+                                            <form action="{{route('changeCommentStatus')}}" method="post">
+                                                @csrf
+                                                @method('PATCH')
+                                                <input type="hidden" value="{{$comment->id}}" name="id">
+                                                <button type="submit" class="bg-green-500 admin-table-btn td-action">تایید</button>
+                                            </form>
+                                        @endif
+
+                                        <form method="post" action="{{route('commentDelete')}}">
+                                            @method('DELETE')
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{$comment->id}}">
+                                            <button type="submit"
+                                                class="bg-red-500 admin-table-btn td-action">حذف
+                                            </button>
+                                        </form>
                                     </div>
                                 </td>
                             </tr>

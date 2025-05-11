@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('author');
             $table->string('content');
+            $table->enum('status', ['pending', 'approved'])->default('pending');
             $table->unsignedBigInteger('post_id');
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
             $table->unsignedBigInteger('user_id');

@@ -48,12 +48,12 @@
                         </thead>
                         <tbody id="rows">
                         <!-- Row 1 -->
-                        
+
                         @foreach($posts as $post)
                             <tr>
                                 <th scope="row">{{$post->id}}</th>
                                 <td data-search="on">{{$post->title}}</td>
-                                <td>{{$post->category}}</td>
+                                <td>{{$post->category->name ?? '---'}}</td>
                                 <td class="flex-1 min-w-32 flex justify-center items-center"><img
                                         onclick="openView(this.src)"
                                         class="w-full h-20 object-cover cursor-pointer rounded-md"
@@ -66,11 +66,22 @@
                                 </td>
                                 <td class="px-2 w-72 py-4">
                                     <div class="flex text-center justify-center items-center gap-2">
-                                        <a href="#edite" class="bg-sky-500 admin-table-btn td-action">ویرایش</a>
+                                        <form method="post" action="{{route('postChangeStatus')}}">
+                                            @csrf
+                                            @method('PATCH')
+                                            <input type="hidden" name="id" value="{{$post->id}}">
+                                                <button type="submit" class="bg-sky-500 admin-table-btn td-action">تغییر وضعیت</button>
+                                            </form>
                                         <form method="post"><button
-                                                class="bg-green-500 admin-table-btn td-action">تغییر وضعیت</button></form>
-                                        <form method="post"><button
-                                                class="bg-red-500 admin-table-btn td-action">حذف</button>
+                                                class="bg-green-500 admin-table-btn td-action">ویرایش</button></form>
+                                        <form method="post" action="{{route('postDelete')}}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="hidden" name="id" value="{{$post->id}}">
+                                            <button
+                                                type="submit"
+                                                class="bg-red-500 admin-table-btn td-action">حذف
+                                            </button>
                                         </form>
                                     </div>
                                 </td>

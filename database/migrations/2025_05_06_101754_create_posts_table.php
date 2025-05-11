@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('writer');
             $table->string('date');
             $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->string('read');
             $table->string('image')->nullable();
             $table->enum('status', ['draft', 'published'])->default('draft');

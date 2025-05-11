@@ -53,8 +53,18 @@
                             <td class="px-2 w-72 py-4">
                                 <div class="flex text-center justify-center items-center gap-2">
                                     <a href="{{route('showCategoryManage','#'.$category->id)}}" class="bg-sky-500 admin-table-btn td-action">ویرایش</a>
-                                    <form method="post"><button class="bg-green-500 admin-table-btn td-action">تغییر وضعیت</button></form>
-                                    <form method="post"><button class="bg-red-500 admin-table-btn td-action">حذف</button></form>
+                                    <form method="post" action="{{route('changeCategoryStatus')}}">
+                                        @csrf
+                                        @method('PATCH')
+                                        <input name="id" type="hidden" value="{{$category->id}}">
+                                        <button class="bg-green-500 admin-table-btn td-action">تغییر وضعیت</button>
+                                    </form>
+                                    <form method="post" action="{{route('categoryDelete')}}">
+                                        @method('delete')
+                                        @csrf
+                                        <input type="hidden" value="{{$category->id}}" name="id">
+                                        <button type="submit" class="bg-red-500 admin-table-btn td-action">حذف</button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>

@@ -25,7 +25,7 @@
 
                     <div class="dashboard-cards">
                         <div>
-                            <h1>516</h1>
+                            <h1>{{$usersCount}}</h1>
                             <span>تعداد کاربران</span>
                         </div>
                         <a href="users.html" class="w-full mt-auto auth-btn rounded-none">بیشتر</a>
@@ -35,7 +35,7 @@
 
                     <div class="dashboard-cards">
                         <div>
-                            <h1>516</h1>
+                            <h1>{{$postsCount}}</h1>
                             <span>تعداد پست های فعال</span>
                         </div>
                         <a href="posts.html#actives" class="w-full mt-auto auth-btn rounded-none">بیشتر</a>
@@ -45,7 +45,7 @@
 
                     <div class="dashboard-cards">
                         <div>
-                            <h1>516</h1>
+                            <h1>{{$categoriesCount}}</h1>
                             <span>تعداد دسته بندی ها</span>
                         </div>
                         <a href="categories.html" class="w-full mt-auto auth-btn rounded-none">بیشتر</a>
@@ -55,7 +55,7 @@
 
                     <div class="dashboard-cards">
                         <div>
-                            <h1>516</h1>
+                            <h1>{{$authorsCount}}</h1>
                             <span>تعداد نویسندگان</span>
                         </div>
                         <a href="users.html#writers" class="w-full mt-auto auth-btn rounded-none">بیشتر</a>
@@ -75,6 +75,77 @@
         </div>
     </div>
 @endsection
+@section('customScripts')
+    <script>
+        const labels = @json($labels);
+        const views = @json($viewsData);
+        const comments = @json($commentsData);
+    </script>
 
+    <script>
+    // Get the canvas element
+    const ctx = document.getElementById('myLineChart').getContext('2d');
+
+    // Define data for the chart
+    const DATA_COUNT = 30;
+    // Chart configuration
+    const config = {
+    type: 'line',
+    data: {
+    labels: labels,
+    datasets: [
+    {
+    label: 'تعداد بازدید',
+    data: views,
+    borderColor: 'rgb(255, 99, 132)', // Red
+    fill: false,
+    cubicInterpolationMode: 'monotone',
+    tension: 0.4
+    },
+    {
+    label: 'تعداد کامنت ها',
+    data: comments,
+    borderColor: 'rgb(54, 162, 235)', // Blue
+    fill: false,
+    tension: 0.4
+    }
+    ]
+    },
+    options: {
+    responsive: true,
+    plugins: {
+    title: {
+    display: false,
+    text: 'Monthly Data Analysis'
+    }
+    },
+    interaction: {
+    intersect: false
+    },
+    scales: {
+    x: {
+    display: true,
+    title: {
+    display: true,
+    text: 'روز'
+    }
+    },
+    y: {
+    display: true,
+    title: {
+    display: true,
+    text: 'تعداد'
+    },
+    suggestedMin: 0,
+    suggestedMax: 200
+    }
+    }
+    }
+    };
+
+    // Initialize the chart
+    new Chart(ctx, config);
+    </script>
+@endsection
 
 

@@ -36,9 +36,15 @@ Route::prefix('admin')->group(function () {
             Route::get('/dashboard', 'showDashboard')->name('showDashboard');
             Route::get('/categories', 'showCategories')->name('showCategories');
             Route::get('/categories/manage', 'showCategoryManage')->name('showCategoryManage');
+            Route::delete('/categories/delete', 'categoryDelete')->name('categoryDelete');
+            Route::patch('/categories/change/status', 'changeCategoryStatus')->name('changeCategoryStatus');
             Route::get('/posts', 'showPosts')->name('showPosts');
+            Route::delete('/posts/delete', 'postDelete')->name('postDelete');
             Route::get('/posts/new', 'showNewPost')->name('showNewPost');
+            Route::patch('/posts/change/status', 'postChangeStatus')->name('postChangeStatus');
             Route::get('/comments', 'showComments')->name('showComments');
+            Route::delete('/comments/delete', 'commentDelete')->name('commentDelete');
+            Route::patch('/comments/change/status', 'changeCommentStatus')->name('changeCommentStatus');
             Route::get('/users', 'showUsers')->name('showUsers');
             Route::delete('/users/delete', 'userDelete')->name('userDelete');
             Route::patch('/users/change/role', 'userRoleChange')->name('userRoleChange');
