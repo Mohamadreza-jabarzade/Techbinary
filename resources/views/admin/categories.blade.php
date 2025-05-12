@@ -52,7 +52,7 @@
                             </td>
                             <td class="px-2 w-72 py-4">
                                 <div class="flex text-center justify-center items-center gap-2">
-                                    <a href="{{route('showCategoryManage','#'.$category->id)}}" class="bg-sky-500 admin-table-btn td-action">ویرایش</a>
+                                    <a href="{{route('showCategoryManage'   ,'id='.$category->id)}}" class="bg-sky-500 admin-table-btn td-action">ویرایش</a>
                                     <form method="post" action="{{route('changeCategoryStatus')}}">
                                         @csrf
                                         @method('PATCH')

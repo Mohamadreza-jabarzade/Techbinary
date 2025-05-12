@@ -23,10 +23,8 @@ class postFactory extends Factory
             'title' => $faker->realText(60), // مثلاً: "معرفی Tailwind CSS"
             'body' => $faker->realText(300), // متن طولانی‌تر برای بدنه
             'writer' => $faker->name(), // مثل: "زهرا محمدی"
-            'date' => $faker->numberBetween(1, 10) . ' روز پیش', // مثل: "۳ روز پیش"
             'category_id' => $faker->numberBetween(1, 3), // فرض بر این است که ۳ دسته داریم
-            'read' => 'خواندن ' . $faker->numberBetween(1, 10) . ' دقیقه', // مثل: "خواندن ۳ دقیقه"
-            'image' => 'https://placehold.co/600x500?text=' . $faker->word() . '&random=' . $faker->unique()->numberBetween(1, 10000),
+            'image' => 'posts/Y78UM6rbBR1t0Z7rvAfyDHm89ICxImZGatXBd1um.png',
             'status' => $this->faker->randomElement(['draft', 'published']),
             'view' => $this->faker->numberBetween(100, 999),
             'created_at' => $this->faker->dateTimeBetween('-1 years', 'now'),

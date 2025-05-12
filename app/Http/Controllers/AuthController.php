@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateAccountForm;
+use App\Http\Requests\createAccountForm;
 use App\Http\Requests\loginFormRequest;
 use App\Http\Requests\registerForm;
 use App\Http\Requests\verifyCodeForm;
@@ -36,7 +36,7 @@ class AuthController extends Controller
             'email' => 'اطلاعات وارد شده صحیح نمی‌باشد.',
         ]);
     }
-    public function createAccount(CreateAccountForm $createAccountForm)
+    public function createAccount(createAccountForm $createAccountForm)
     {
         $user_created = User::create([
             'username' => $createAccountForm->username,

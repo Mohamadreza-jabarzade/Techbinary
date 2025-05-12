@@ -53,11 +53,11 @@
                             <tr>
                                 <th scope="row">{{$post->id}}</th>
                                 <td data-search="on">{{$post->title}}</td>
-                                <td>{{$post->category->name ?? '---'}}</td>
+                                <td>{{$post->category->name ?? '---' }}</td>
                                 <td class="flex-1 min-w-32 flex justify-center items-center"><img
                                         onclick="openView(this.src)"
                                         class="w-full h-20 object-cover cursor-pointer rounded-md"
-                                        src="{{$post->image}}" alt=""></td>
+                                        src="{{asset('storage/' . $post->image)}}" alt=""></td>
                                 <td>{{$post->writer}}</td>
                                 <td>{{$post->view}}</td>
                                 <td>{{$post->comments_count}}</td>

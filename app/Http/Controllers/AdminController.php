@@ -6,6 +6,8 @@ use App\Http\Requests\changeCategoryStatusRequest;
 use App\Http\Requests\changeCommentStatusRequest;
 use App\Http\Requests\changePostStatusRequest;
 use App\Http\Requests\changeUserRoleRequest;
+use App\Http\Requests\createCategoryRequest;
+use App\Http\Requests\createPostFormRequest;
 use App\Http\Requests\deleteCategoryRequest;
 use App\Http\Requests\deleteCommentRequest;
 use App\Http\Requests\deletePostRequest;
@@ -77,24 +79,61 @@ class AdminController extends Controller
     }
 
 
-    public function showCategoryManage()
+    public function showCategoryManage(Request $request)
     {
+        dd($request);
         return view('admin.categoryManage');
+    }
+
+    public function createCategory(createCategoryRequest $request)
+    {
+        $createdCategory = Category::create([
+            'name' => request('name'),
+            'slug' => request('slug'),
+        ]);
+        if($createdCategory){
+            return redirect()->route('showCategories')->with('success','category has been created');
+        }
+        else{
+            return redirect()->route('showCategories')->with('error','Something went wrong');
+        }
+
     }
     public function showPosts()
     {
         $posts = Post::with(['category:id,name']) // فقط ستون id و name از category
         ->withCount('comments')
             ->addSelect('id', 'title', 'category_id', 'image', 'writer', 'view', 'status')
+            ->orderBy('created_at', 'DESC')
             ->get();
         return view('admin.posts',compact('posts'));
     }
 
     public function showNewPost()
     {
-        return view('admin.newPost');
+        $categories =  Category::all()->where('status', 'active')->sortByDesc('created_at');
+        return view('admin.newPost', compact('categories'));
     }
 
+    public function createNewPost(createPostFormRequest $request)
+    {
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('posts', 'public');
+        }
+
+        Post::create([
+            'title' => $request->title,
+            'category_id' => $request->category_id,
+            'image' => $imagePath,
+            'writer' => auth()->user()->name ?? 'مدیر', // یا دستی مقدار بده
+            'body' => $request->body,
+            'view' => 0,
+            'status' => 'draft', // یا 'published' اگر می‌خوای فوراً منتشر شه
+        ]);
+
+        return redirect()->route('showPosts')->with('success', 'پست با موفقیت ثبت شد.');
+    }
     public function postDelete(deletePostRequest $request)
     {
         $deletedPost = Post::find(request('id'))->delete();

@@ -28,29 +28,31 @@
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg bg-light-text-Primary p-3">
 
 
-                    <form id="new" action="" method="post" class="p-10 w-full flex gap-10 flex-col flex-wrap" dir="rtl">
+                    <form id="new" action="{{route('createNewPost')}}" method="post" enctype="multipart/form-data" class="p-10 w-full flex gap-10 flex-col flex-wrap" dir="rtl">
+                        @csrf
                         <div class="flex gap-10">
                             <label class="flex flex-col">
                                 عنوان :
-                                <input type="text"
+                                <input
+                                       name="title"
+                                       type="text"
                                        class="text-right outline-none border-none placeholder:text-right hover:ring-1 focus:ring-1 ring-sky-500 ring-offset-2 transition-all duration-300 bg-light-text-soft h-8 w-64 rounded-md px-2 my-3"
                                        placeholder="اموزش">
                             </label>
                             <div class="flex flex-col">
                                 <label>دسته‌بندی:</label>
-                                <select id="categorySelect"
+                                <select name="category_id" id="categorySelect"
                                         class="text-right outline-none border-none hover:ring-1 focus:ring-1 ring-sky-500 ring-offset-2 transition-all duration-300 bg-light-text-soft h-8 w-64 rounded-md px-2 my-3">
                                     <option value="" disabled selected>یک دسته‌بندی انتخاب کنید</option>
-                                    <option value="1">آموزش</option>
-                                    <option value="2">اخبار فناوری</option>
-                                    <option value="3">بررسی محصول</option>
-                                    <option value="4">برنامه‌نویسی</option>
+                                    @foreach($categories as $category)
+                                        <option value="{{$category->id}}">{{$category->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
 
                             <div class="flex flex-col">
                                 <label>تصویر پست:</label>
-                                <input type="file" id="fileInput" accept="image/*" class="block w-64 text-sm text-gray-500 my-3
+                                <input name="image" type="file" id="fileInput" accept="image/*" class="block w-64 text-sm text-gray-500 my-3
                                         file:ml-4 file:py-2 file:px-4
                                         file:rounded-full file:border-0
                                         file:text-sm file:font-semibold
@@ -105,7 +107,8 @@
                             <div id="editor">
                             </div>
                         </div>
-                        <button class="bg-my-second cursor-pointer text-white font-bold px-3 py-2 rounded-xl max-w-20 text-center">انتشار</button>
+                        <button type="submit" class="bg-my-second cursor-pointer text-white font-bold px-3 py-2 rounded-xl max-w-20 text-center">انتشار</button>
+                        <input type="hidden" name="body" id="bodyInput">
                     </form>
 
                 </div>
@@ -120,6 +123,11 @@
     <script>
         const fileInput = document.getElementById('fileInput');
         const imagePreview = document.getElementById('imagePreview');
+
+        document.querySelector('#new').addEventListener('submit', function (e) {
+            const content = document.querySelector('.ql-editor').innerHTML;
+            document.getElementById('bodyInput').value = content;
+        });
 
         fileInput.addEventListener('change', function (event) {
             const file = event.target.files[0];

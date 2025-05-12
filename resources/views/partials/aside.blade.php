@@ -4,14 +4,9 @@
         <div class="w-full  flex flex-wrap gap-2 justify-start items-start content-start bg-slate-200 p-3 rounded-2xl">
             <h2 class="text-xl w-full text-center justify-center flex items-center gap-2 text-dark-text-soft mb-2">دسته بندی ها</h2>
             <div id="mobile-category" class="grid grid-cols-2 w-full text-center space-y-5 overflow-hidden relative transition duration-700">
-                <a href="" class="aside-category-mobile">category</a>
-                <a href="" class="aside-category-mobile">go</a>
-                <a href="" class="aside-category-mobile">like</a>
-                <a href="" class="aside-category-mobile">content</a>
-                <a href="" class="aside-category-mobile">post</a>
-                <a href="" class="aside-category-mobile">google</a>
-                <a href="" class="aside-category-mobile">blog</a>
-                <a href="" class="aside-category-mobile">app</a>
+                @foreach($categories as $category)
+                <a href="" class="aside-category-mobile">{{$category->name}}</a>
+                @endforeach
             </div>
         </div>
     </div >
@@ -30,16 +25,10 @@
             <h2 class="text-xl w-full text-right flex items-center gap-2 text-dark-text-soft mb-2"><span
                     class="flex justify-center items-center rounded-full bg-light-text-soft size-10 text-base"><i
                         class="fa fa-flag"></i></span>دسته بندی ها</h2>
-            <a href="" class="aside-category">category</a>
-            <a href="" class="aside-category">go</a>
-            <a href="" class="aside-category">like</a>
-            <a href="" class="aside-category">content</a>
-            <a href="" class="aside-category">post</a>
-            <a href="" class="aside-category">google</a>
-            <a href="" class="aside-category">blog</a>
-            <a href="" class="aside-category">app</a>
-
+            @foreach($categories as $category)
+                <a href="" class="aside-category">{{$category->name}}</a>
+            @endforeach
         </div>
     </div>
-    
+
 </aside>

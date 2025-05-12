@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\HomeController;
 
+Route::get('',[HomeController::class,'showHome']);
 Route::get('/',[HomeController::class,'showHome'])->name('showHome');
 
 Route::view('/login','auth.login')->name('showLogin');
@@ -38,9 +39,11 @@ Route::prefix('admin')->group(function () {
             Route::get('/categories/manage', 'showCategoryManage')->name('showCategoryManage');
             Route::delete('/categories/delete', 'categoryDelete')->name('categoryDelete');
             Route::patch('/categories/change/status', 'changeCategoryStatus')->name('changeCategoryStatus');
+            Route::post('/categories/create', 'createCategory')->name('createCategory');
             Route::get('/posts', 'showPosts')->name('showPosts');
             Route::delete('/posts/delete', 'postDelete')->name('postDelete');
             Route::get('/posts/new', 'showNewPost')->name('showNewPost');
+            Route::post('/posts/new/create', 'createNewPost')->name('createNewPost');
             Route::patch('/posts/change/status', 'postChangeStatus')->name('postChangeStatus');
             Route::get('/comments', 'showComments')->name('showComments');
             Route::delete('/comments/delete', 'commentDelete')->name('commentDelete');

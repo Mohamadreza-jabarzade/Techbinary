@@ -21,19 +21,22 @@
             <div class="h-full overflow-y-auto space-y-5 p-5">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg bg-light-text-Primary min-h-52">
 
-                    <form id="new" action="" method="post" class="p-10 w-full flex gap-10 flex-col hidden">
+                    <form id="new" action="{{route('createCategory')}}" method="post" class="p-10 w-full flex gap-10 flex-col hidden">
+                        @csrf
                         <div class="flex gap-10 ">
                             <label class="flex flex-col">
                                 نام :
                                 <input type="text"
+                                       name="name"
                                        class="text-right outline-none border-none placeholder:text-right hover:ring-1 focus:ring-1 ring-sky-500 ring-offset-2 transition-all duration-300 bg-light-text-soft h-8 w-64 rounded-md px-2 my-3"
                                        placeholder="اموزش">
                             </label>
                             <label class="flex flex-col">
-                                عنوان :
+                                slug :
                                 <input type="text"
-                                       class="text-right outline-none border-none placeholder:text-right hover:ring-1 focus:ring-1 ring-sky-500 ring-offset-2 transition-all duration-300 bg-light-text-soft h-8 w-64 rounded-md px-2 my-3"
-                                       placeholder="اموزش">
+                                       name="slug"
+                                       class="outline-none border-none hover:ring-1 focus:ring-1 ring-sky-500 ring-offset-2 transition-all duration-300 bg-light-text-soft h-8 w-64 rounded-md px-2 my-3"
+                                       placeholder="learning">
                             </label>
                         </div>
                         <button class="bg-my-second cursor-pointer text-white font-bold px-3 py-2 rounded-xl max-w-20 text-center">افزودن</button>

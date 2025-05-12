@@ -19,6 +19,7 @@ class categoryFactory extends Factory
         return [
             'name' => $this->faker->randomElement(['تکنولوژی', 'برنامه نویسی','ویندوز']),
             'status' => $this->faker->randomElement(['active', 'inactive']),
+            'slug' => $this->faker->slug(),
             'created_at' => $this->faker->date(),
         ];
     }
