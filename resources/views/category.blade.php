@@ -2,7 +2,7 @@
 @extends('layouts.app')
 @section('title', 'خانه')
 @section('content')
-    @include('partials.alert')
+
     <!-- hero -->
     <section id="hero" class="w-full h-[350px] relative bg-[url(../images/1.jpg)] bg-cover bg-center">
 

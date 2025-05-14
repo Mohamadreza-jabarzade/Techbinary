@@ -8,7 +8,7 @@
     <main class="w-4/5 h-full bg-light-text-soft flex flex-col px-10 py-5 relative">
 
 {{--        show alerts here--}}
-
+        @include('partials.alert')
 
         <!-- Header -->
         <header class="flex justify-between flex-row items-center mb-5 p-5">

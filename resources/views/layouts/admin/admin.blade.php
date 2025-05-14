@@ -14,6 +14,7 @@
     <div class="h-[100svh] flex flex-row overflow-hidden">
         @yield('aside')
         {{-- ================================= --}}
+
         @yield('content')
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

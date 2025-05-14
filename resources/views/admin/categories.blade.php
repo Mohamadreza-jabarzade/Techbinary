@@ -8,12 +8,13 @@
     <main class="w-4/5 h-full bg-light-text-soft flex flex-col px-10 py-5 relative">
 
 {{--        show alerts here--}}
+        @include('partials.alert')
         <!-- Header -->
         <header class="flex justify-between flex-row items-center mb-5 p-5">
             <h1 class="text-3xl text-dark-text-Primary"><i class="fa fa-folder-open ml-3"></i>
                 دسته‌بندی‌ها </i>
             </h1>
-            <a href="{{route('showCategoryManage')}}" class="bg-my-second text-white font-bold px-3 py-2 rounded-xl">
+            <a href="{{route('showCategoryManage',null)}}" class="bg-my-second text-white font-bold px-3 py-2 rounded-xl">
                 افزودن
             </a>
         </header>
@@ -36,6 +37,7 @@
                         <tr>
                             <th scope="col" class="px-6 py-3">ای دی</th>
                             <th scope="col" class="px-6 py-3">نام</th>
+                            <th scope="col" class="px-6 py-3">slug</th>
                             <th scope="col" class="px-6 py-3">تعداد پست‌ها</th>
                             <th scope="col" class="px-6 py-3">وضعیت</th>
                             <th scope="col" class="px-6 py-3">عملیات</th>
@@ -46,13 +48,14 @@
                         <tr>
                             <th scope="row">{{$category->id}}</th>
                             <td data-search="on" class="search">{{$category->name}}</td>
+                            <td>{{$category->slug}}</td>
                             <td>{{$category->posts_count}}</td>
                             <td class="{{ $category->status == 'active' ? 'text-green-500' : 'text-red-500' }}">
                                 {{ $category->status == 'active' ? 'فعال' : 'غیرفعال' }}
                             </td>
                             <td class="px-2 w-72 py-4">
                                 <div class="flex text-center justify-center items-center gap-2">
-                                    <a href="{{route('showCategoryManage'   ,'id='.$category->id)}}" class="bg-sky-500 admin-table-btn td-action">ویرایش</a>
+                                    <a href="{{route('showCategoryManage',$category->id)}}" class="bg-sky-500 admin-table-btn td-action">ویرایش</a>
                                     <form method="post" action="{{route('changeCategoryStatus')}}">
                                         @csrf
                                         @method('PATCH')

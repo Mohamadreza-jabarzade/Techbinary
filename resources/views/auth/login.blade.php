@@ -14,7 +14,13 @@
         @csrf
         <h1 class="text-my-second text-lg font-medium">ورود به حساب کاربری</h1>
         <input class="auth-input" type="email" name="email" placeholder="ایمیل خود را وارد کنید" required>
+        @error('email')
+        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+        @enderror
         <input class="auth-input" type="password" name="password" placeholder="رمز عبور خود را وارد کنید" required>
+        @error('password')
+        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+        @enderror
         <div class="w-full flex justify-end">
             <button class="auth-btn"><span>ورود</span><i class="fa fa-angle-left absolute left-3"></i></button>
         </div>

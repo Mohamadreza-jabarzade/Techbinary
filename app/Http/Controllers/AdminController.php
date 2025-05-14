@@ -12,6 +12,7 @@ use App\Http\Requests\deleteCategoryRequest;
 use App\Http\Requests\deleteCommentRequest;
 use App\Http\Requests\deletePostRequest;
 use App\Http\Requests\deleteUserRequest;
+use App\Http\Requests\updateCategoryRequest;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Post;
@@ -79,10 +80,16 @@ class AdminController extends Controller
     }
 
 
-    public function showCategoryManage(Request $request)
+    public function showCategoryManage($categoryId = null)
     {
-        dd($request);
-        return view('admin.categoryManage');
+        if ($categoryId == null) {
+            return view('admin.categoryManage');
+        }
+        if ($categoryId !== null) {
+            $category = Category::find($categoryId);
+            return view('admin.categoryManage', compact('category'));
+        }
+
     }
 
     public function createCategory(createCategoryRequest $request)
@@ -93,6 +100,26 @@ class AdminController extends Controller
         ]);
         if($createdCategory){
             return redirect()->route('showCategories')->with('success','category has been created');
+        }
+        else{
+            return redirect()->route('showCategories')->with('error','Something went wrong');
+        }
+
+    }
+
+    public function updateCategory(updateCategoryRequest $request)
+    {
+        $category = Category::find(request('category_id'));
+        if ($category) {
+            $category->name = request('name');
+            $category->slug = request('slug');
+            $updatedCategory = $category->save();
+            if($updatedCategory){
+                return redirect()->route('showCategories')->with('success','category has been updated');
+            }
+            else{
+                return redirect()->route('showCategories')->with('error','Something went wrong');
+            }
         }
         else{
             return redirect()->route('showCategories')->with('error','Something went wrong');

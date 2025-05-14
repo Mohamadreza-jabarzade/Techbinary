@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\createAccountForm;
+use App\Http\Requests\forgotEmailFormRequest;
+use App\Http\Requests\forgotNewPasswordStoreRequest;
 use App\Http\Requests\loginFormRequest;
 use App\Http\Requests\registerForm;
 use App\Http\Requests\verifyCodeForm;
@@ -14,6 +16,46 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    public function forgotNewPasswordStore(forgotNewPasswordStoreRequest $request)
+    {
+        $email = session('email_for_verification');
+        $user = User::where('email', $email)->first();
+        $user->password = bcrypt(request('password'));
+        $userPasswordChanged = $user->save();
+        if ($userPasswordChanged) {
+            return redirect()->route('showHome')->with('success','Your password has been changed');
+        }
+        else{
+            return redirect()->route('showForgot')->with('errorMessage', 'something went wrong');
+        }
+
+    }
+    public function forgotVerifyCode(verifyCodeForm $request)
+    {
+        $email = session('email_for_verification');
+        $code = request("code1").request("code2").request("code3").request("code4").request("code5").request("code6");
+        if (session('verification_code') == $code){
+            return redirect()->route('showCreateNewPass');
+        }else{
+            return redirect()->route('showForgotEmailCheck')->with('error','verification code is wrong');
+        }
+    }
+    public function forgotEmailCheck(forgotEmailFormRequest $request)
+    {
+        $code = rand(100000, 999999);
+
+        Mail::raw("Your verification code is: $code", function ($message) use ($request) {
+            $message->to($request->email)
+                ->subject("verification code for recover your account : ");
+        });
+
+        session([
+            'verification_code' => $code,
+            'email_for_verification' => $request->email,
+        ]);
+
+        return redirect()->route('showForgotEmailCheck');
+    }
     public function logout(Request $request)
     {
         Auth::logout(); // 👈 لاگ‌اوت کردن کاربر

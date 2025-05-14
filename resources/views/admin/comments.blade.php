@@ -9,6 +9,7 @@
 
 
 {{--        show alerts here--}}
+        @include('partials.alert')
 
         <!-- Header -->
         <header class="flex justify-between flex-row items-center mb-5 p-5">

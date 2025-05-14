@@ -9,37 +9,48 @@ use App\Http\Controllers\HomeController;
 
 Route::get('',[HomeController::class,'showHome']);
 Route::get('/',[HomeController::class,'showHome'])->name('showHome');
-
-Route::view('/login','auth.login')->name('showLogin');
-Route::view('/register','auth.register')->name('showRegister');
-Route::view('/forgot','auth.forgot')->name('showForgot');
-Route::view('/forgot/email/check','auth.forgotEmail')->name('showForgotEmailCheck');
-Route::view('/forgot/new','auth.forgot')->name('showForgotNew');
-
-
-Route::post('/register/email/check',[AuthController::class, 'registerEmailCheck'])->name('RegisterEmailCheck');
-Route::get('/register/email/check',[AuthController::class, 'showRegisterEmailCheck'])->name('showRegisterEmailCheck');
-Route::post('/register/create',[AuthController::class, 'verifyCode'])->name('verifyCode');
-Route::get('/register/account',[AuthController::class, 'showCreateAccount'])->name('showCreateAccount');
-Route::post('/register/save/account',[AuthController::class, 'createAccount'])->name('CreateAccount');
-
-Route::get('/register/verify', [AuthController::class, 'showVerifyForm'])->name('showVerifyForm');
-Route::get('/register/verify/resend', [AuthController::class, 'resendVerifyCode'])->name('resendVerifyCode');
-
-Route::post('/login',[AuthController::class, 'login'])->name('login');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::get('/load/posts', [PostController::class, 'loadPosts'])->name('loadPosts');
+Route::get('/load/posts/', [PostController::class, 'loadPosts'])->name('loadPosts');
 Route::POST('/like/post', [LikeController::class, 'postLike'])->name('postLike');
+
+
+
+Route::prefix('auth')->group(function () {
+    Route::controller(AuthController::class)->group(function () {
+        Route::view('/login','auth.login')->name('showLogin');
+        Route::view('/register','auth.register')->name('showRegister');
+
+        Route::view('/forgot','auth.forgot')->name('showForgot');
+        Route::post('/forgot/email/check','forgotEmailCheck')->name('forgotEmailCheck');
+        Route::view('/forgot/email/check','auth.forgotEmail')->name('showForgotEmailCheck');
+        Route::post('/forgot/verify/code','forgotVerifyCode')->name('forgotVerifyCode');
+        Route::view('/forgot/new/password','auth.forgotEnd')->name('showCreateNewPass');
+        Route::post('/forgot/new/store','forgotNewPasswordStore')->name('forgotNewPasswordStore');
+
+        Route::post('/register/email/check',[AuthController::class, 'registerEmailCheck'])->name('registerEmailCheck');
+        Route::get('/register/email/check',[AuthController::class, 'showRegisterEmailCheck'])->name('showRegisterEmailCheck');
+        Route::post('/register/create',[AuthController::class, 'verifyCode'])->name('verifyCode');
+        Route::get('/register/account',[AuthController::class, 'showCreateAccount'])->name('showCreateAccount');
+        Route::post('/register/save/account',[AuthController::class, 'createAccount'])->name('CreateAccount');
+
+        Route::get('/register/verify', [AuthController::class, 'showVerifyForm'])->name('showVerifyForm');
+        Route::get('/register/verify/resend', [AuthController::class, 'resendVerifyCode'])->name('resendVerifyCode');
+
+        Route::post('/login',[AuthController::class, 'login'])->name('login');
+        Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    });
+});
+
 
 Route::prefix('admin')->group(function () {
         Route::controller(AdminController::class)->group(function () {
             Route::get('', 'showDashboard');
             Route::get('/dashboard', 'showDashboard')->name('showDashboard');
             Route::get('/categories', 'showCategories')->name('showCategories');
-            Route::get('/categories/manage', 'showCategoryManage')->name('showCategoryManage');
+            Route::get('/categories/manage/{id?}', 'showCategoryManage')->name('showCategoryManage');
             Route::delete('/categories/delete', 'categoryDelete')->name('categoryDelete');
             Route::patch('/categories/change/status', 'changeCategoryStatus')->name('changeCategoryStatus');
             Route::post('/categories/create', 'createCategory')->name('createCategory');
+            Route::patch('/categories/update', 'updateCategory')->name('updateCategory');
             Route::get('/posts', 'showPosts')->name('showPosts');
             Route::delete('/posts/delete', 'postDelete')->name('postDelete');
             Route::get('/posts/new', 'showNewPost')->name('showNewPost');

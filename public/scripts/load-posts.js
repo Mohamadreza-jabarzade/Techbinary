@@ -1,11 +1,10 @@
 const main = document.getElementById("main");
 const aside = document.getElementById("aside");
 const btnUp = document.getElementById("btn-up");
-var csrfToken = window.appData.csrf;
-const isLoggedIn = window.appData.auth;
 const userId = window.appData.user_id;
+const apiUrl = window.appData.apiUrl;
 const bottomOffset = 500;
-const postUrl = "http://127.0.0.1:8000/load/posts";
+const postUrl = apiUrl;
 var loaded = false;
 const clientHeight = window.innerHeight;
 
