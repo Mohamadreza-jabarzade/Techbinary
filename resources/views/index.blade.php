@@ -101,7 +101,12 @@
             easing: 'ease-out-back'
         });
         window.appData = {
-            apiUrl: '{{route('loadPosts')}}',
+            csrf: '{{csrf_token()}}',
+            @if(isset($category_name))
+                    apiUrl: '{{route('loadPosts',$category_name)}}',
+            @else
+               apiUrl: '{{route('loadPosts')}}',
+            @endif
             user_id: {{ Auth::check() ? Auth::id() : 'null' }}
         };
     </script>

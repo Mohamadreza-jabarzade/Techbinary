@@ -26,4 +26,22 @@ class HomeController extends Controller
         return view('index' ,compact('categories'));
     }
 
+    public function showCategoryPosts($category_name)
+    {
+        global $likedPostIds;
+        $categories =  Category::all();
+
+        if (Auth::check()) {
+            $query = Like::where('user_id', Auth::id())->pluck('post_id');
+            if ($query) {
+                return view('index',[
+                    'likedPostIds' => $query,
+                    'categories' => $categories,
+                    'category_name' => $category_name
+                ]);
+            }
+        }
+        return view('index' ,compact('categories','category_name'));
+    }
+
 }

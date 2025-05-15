@@ -5,7 +5,7 @@
             <h2 class="text-xl w-full text-center justify-center flex items-center gap-2 text-dark-text-soft mb-2">دسته بندی ها</h2>
             <div id="mobile-category" class="grid grid-cols-2 w-full text-center space-y-5 overflow-hidden relative transition duration-700">
                 @foreach($categories as $category)
-                <a href="" class="aside-category-mobile">{{$category->name}}</a>
+                <a href="{{route('showCategoryPosts',$category->name)}}" class="aside-category-mobile">{{$category->name}}</a>
                 @endforeach
             </div>
         </div>
@@ -26,7 +26,7 @@
                     class="flex justify-center items-center rounded-full bg-light-text-soft size-10 text-base"><i
                         class="fa fa-flag"></i></span>دسته بندی ها</h2>
             @foreach($categories as $category)
-                <a href="" class="aside-category">{{$category->name}}</a>
+                <a href="{{route('showCategoryPosts',$category->name)}}" class="aside-category">{{$category->name}}</a>
             @endforeach
         </div>
     </div>

@@ -2,7 +2,7 @@
 <div class="post-wrapper" data-aos="zoom-in-up">
     <div class="post-left">
         <div class="post-author">
-            <img src="images/images1.png" alt="Author" class="post-author-img" />
+            <img src="/images/images1.png" alt="Author" class="post-author-img" />
             <span class="post-author-text"> {{ $post->writer }} | {{\Carbon\Carbon::parse($post->created_at)->diffForHumans()}} </span>
         </div>
         <a href="#" class="post-content group">

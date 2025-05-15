@@ -7,9 +7,9 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\HomeController;
 
-Route::get('',[HomeController::class,'showHome']);
-Route::get('/',[HomeController::class,'showHome'])->name('showHome');
-Route::get('/load/posts/', [PostController::class, 'loadPosts'])->name('loadPosts');
+Route::get('',[HomeController::class,'showHome'])->name('showHome');
+Route::get('/category/{category_name}',[HomeController::class,'showCategoryPosts'])->name('showCategoryPosts');
+Route::get('/load/posts/{category_name?}', [PostController::class, 'loadPosts'])->name('loadPosts');
 Route::POST('/like/post', [LikeController::class, 'postLike'])->name('postLike');
 
 

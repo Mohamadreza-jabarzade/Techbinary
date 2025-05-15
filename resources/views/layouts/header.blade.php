@@ -2,7 +2,7 @@
     <header class="containe h-16 flex justify-between items-center px-1">
 
         <!-- logo -->
-        <img src="Logo.png" alt="TechBinary" class="w-28">
+        <img src="/Logo.png" alt="TechBinary" class="w-28">
         <!-- logeEnd -->
 
 
