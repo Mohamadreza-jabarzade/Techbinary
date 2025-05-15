@@ -100,7 +100,7 @@
             duration: 1000,
             easing: 'ease-out-back'
         });
-        window.appData = {index.blade.php
+        window.appData = {
             apiUrl: '{{route('loadPosts')}}',
             user_id: {{ Auth::check() ? Auth::id() : 'null' }}
         };

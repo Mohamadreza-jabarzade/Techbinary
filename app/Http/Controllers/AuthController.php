@@ -23,11 +23,12 @@ class AuthController extends Controller
         $user->password = bcrypt(request('password'));
         $userPasswordChanged = $user->save();
         if ($userPasswordChanged) {
-            return redirect()->route('showHome')->with('success','Your password has been changed');
+            return redirect()->route('showHome')->with('success','your password has been changed');
         }
         else{
             return redirect()->route('showForgot')->with('errorMessage', 'something went wrong');
         }
+
 
     }
     public function forgotVerifyCode(verifyCodeForm $request)
