@@ -9,11 +9,13 @@ class Post extends Model
 {
     public function getReadTimeAttribute()
     {
-        $words = str_word_count(strip_tags($this->body));
-        $minutes = max(1, ceil($words / 200)); // حداقل 1 دقیقه
+        $body = strip_tags($this->body ?? '');
+        // شمارش کلمات فارسی و انگلیسی
+        preg_match_all('/[\p{L}\p{N}_]+/u', $body, $matches);
+        $words = count($matches[0]);
+        $minutes = max(1, ceil($words / 150));
         return "خواندن {$minutes} دقیقه";
     }
-
     protected $guarded = [];
     use HasFactory;
     public function likes()
@@ -26,7 +28,7 @@ class Post extends Model
     }
     public function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class)->orderBy('created_at', 'desc');
     }
     public function category()
     {

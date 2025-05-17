@@ -6,11 +6,16 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\HomeController;
-
+use App\Http\Controllers\CommentController;
+Route::post('/upload', [\App\Http\Controllers\CKEditorUploadController::class, 'upload']);
 Route::get('',[HomeController::class,'showHome'])->name('showHome');
+Route::get('post/{post_title}',[PostController::class,'showPostDetail'])->name('showPostDetail');
 Route::get('/category/{category_name}',[HomeController::class,'showCategoryPosts'])->name('showCategoryPosts');
+Route::get('/search',[HomeController::class,'showResultPosts'])->name('showResultPosts');
 Route::get('/load/posts/{category_name?}', [PostController::class, 'loadPosts'])->name('loadPosts');
+Route::get('/load/result/{searchString}', [PostController::class, 'loadResultPosts'])->name('loadResultPosts');
 Route::POST('/like/post', [LikeController::class, 'postLike'])->name('postLike');
+Route::POST('/post/comment', [CommentController::class, 'createComment'])->name('createComment');
 
 
 
@@ -41,7 +46,7 @@ Route::prefix('auth')->group(function () {
 });
 
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware('onlyAdmin')->group(function () {
         Route::controller(AdminController::class)->group(function () {
             Route::get('', 'showDashboard');
             Route::get('/dashboard', 'showDashboard')->name('showDashboard');
@@ -55,6 +60,8 @@ Route::prefix('admin')->group(function () {
             Route::delete('/posts/delete', 'postDelete')->name('postDelete');
             Route::get('/posts/new', 'showNewPost')->name('showNewPost');
             Route::post('/posts/new/create', 'createNewPost')->name('createNewPost');
+            Route::get('/posts/edit/{post}', 'showEditPost')->name('showEditPost');
+            Route::patch('/posts/edit/save', 'editPost')->name('editPost');
             Route::patch('/posts/change/status', 'postChangeStatus')->name('postChangeStatus');
             Route::get('/comments', 'showComments')->name('showComments');
             Route::delete('/comments/delete', 'commentDelete')->name('commentDelete');

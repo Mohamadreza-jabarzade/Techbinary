@@ -12,12 +12,14 @@ use App\Http\Requests\deleteCategoryRequest;
 use App\Http\Requests\deleteCommentRequest;
 use App\Http\Requests\deletePostRequest;
 use App\Http\Requests\deleteUserRequest;
+use App\Http\Requests\editPostRequest;
 use App\Http\Requests\updateCategoryRequest;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -136,6 +138,12 @@ class AdminController extends Controller
         return view('admin.posts',compact('posts'));
     }
 
+    public function showEditPost(Post $post)
+    {
+        //route model binding
+        $categories =  Category::all()->where('status', 'active')->sortByDesc('created_at');
+        return view('admin.editPost', compact('categories', 'post'));
+    }
     public function showNewPost()
     {
         $categories =  Category::all()->where('status', 'active')->sortByDesc('created_at');
@@ -153,7 +161,7 @@ class AdminController extends Controller
             'title' => $request->title,
             'category_id' => $request->category_id,
             'image' => $imagePath,
-            'writer' => auth()->user()->name ?? 'مدیر', // یا دستی مقدار بده
+            'writer' => auth()->user()->username ?? 'مدیر', // یا دستی مقدار بده
             'body' => $request->body,
             'view' => 0,
             'status' => 'draft', // یا 'published' اگر می‌خوای فوراً منتشر شه
@@ -187,6 +195,35 @@ class AdminController extends Controller
         }
         else{
             return back()->with('error','Something went wrong');
+        }
+    }
+
+    public function editPost(editPostRequest $request)
+    {
+        $imagePath = null;
+        $post = Post::findOrFail($request->id);
+            if ($post) {
+                    if ($request->hasFile('image')) {
+                        // ذخیره عکس جدید
+                        $imagePath = $request->file('image')->store('posts', 'public');
+                    }
+            $post->title = request('title');
+            $post->category_id = request('category_id');
+            $post->writer = auth()->user()->username ?? 'مدیر';
+            $post->body = request('body');
+            if ($imagePath) {
+                $post->image = $imagePath;
+            }
+            $updatedPost = $post->save();
+            if($updatedPost){
+                return redirect()->route('showPosts')->with('success', 'post has been updated');
+            }
+            else{
+                return redirect()->route('showPosts')->with('error', 'تغییراتی روی پست مورد نظر صورت نگرفت');
+            }
+        }
+        else{
+            return redirect()->route('showPosts')->with('error', 'پست مورد پیدا نشد');
         }
     }
     public function showComments()

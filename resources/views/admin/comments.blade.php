@@ -49,7 +49,7 @@
                                 <td>{{$comment->author}}</td>
                                 <td data-search="on">{{$comment->content}}</td>
                                 <td class="max-w-40">
-                                    <p class="truncate max-w-32">{{ $comment->post->title ?? 'عنوان یافت نشد' }}</p>
+                                    <p class="hover:bg-red-200  truncate max-w-32"><a href="{{route('showPostDetail',$comment->post->title)}}">{{ $comment->post->title ?? 'عنوان یافت نشد' }}</a></p>
                                 </td>
                                 <td>{{$comment->status == 'pending' ? 'در انتظار تایید' : 'تایید شده'}}</td>
                                 <td class="px-2 w-72 py-4">

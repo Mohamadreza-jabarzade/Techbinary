@@ -53,7 +53,7 @@
                         @foreach($posts as $post)
                             <tr>
                                 <th scope="row">{{$post->id}}</th>
-                                <td data-search="on">{{$post->title}}</td>
+                                <td class="hover:bg-red-200" data-search="on"><a class="" href="{{route('showPostDetail',$post->title)}}">{{$post->title}}</a></td>
                                 <td>{{$post->category->name ?? '---' }}</td>
                                 <td class="flex-1 min-w-32 flex justify-center items-center"><img
                                         onclick="openView(this.src)"
@@ -73,8 +73,9 @@
                                             <input type="hidden" name="id" value="{{$post->id}}">
                                                 <button type="submit" class="bg-sky-500 admin-table-btn td-action">تغییر وضعیت</button>
                                             </form>
-                                        <form method="post"><button
-                                                class="bg-green-500 admin-table-btn td-action">ویرایش</button></form>
+                                        <a class="bg-green-500 admin-table-btn td-action" href="{{route('showEditPost',$post->id)}}">
+                                                ویرایش
+                                        </a>
                                         <form method="post" action="{{route('postDelete')}}">
                                             @csrf
                                             @method('DELETE')

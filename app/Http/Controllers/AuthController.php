@@ -38,7 +38,7 @@ class AuthController extends Controller
         if (session('verification_code') == $code){
             return redirect()->route('showCreateNewPass');
         }else{
-            return redirect()->route('showForgotEmailCheck')->with('error','verification code is wrong');
+            return redirect()->route('showForgotEmailCheck')->with('error','');
         }
     }
     public function forgotEmailCheck(forgotEmailFormRequest $request)

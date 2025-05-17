@@ -13,7 +13,12 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-
+        public function showPostDetail($post_title)
+        {
+            $categories = Category::all();
+            $post = Post::with('comments')->withCount('likes')->where('title', $post_title)->first();
+            return view('post', compact('post', 'categories'));
+        }
         public function loadPosts($category_name = null)
         {
             if ($category_name) {
@@ -46,35 +51,36 @@ class PostController extends Controller
             $html = '';
 
             foreach ($posts as $post) {
-                $html .= view('post', compact('post', 'arr_posts'))->render();
+                $html .= view('partials.loadPost', compact('post', 'arr_posts'))->render();
             }
             return response()->json(['html' => $html]);
         }
-
-    public function showCategoryPosts($categoryId)
+    public function loadResultPosts($searchString)
     {
-        $posts = Post::select('id', 'title', 'body', 'writer', 'category_id', 'image', 'view', 'created_at')
-            ->where('status', 'published')
-            ->where('category_id', $categoryId)
-            ->with(['category:id,name']) // فقط id و name از دسته‌بندی
-            ->withCount('likes')
-            ->orderBy('id', 'desc')
-            ->get();
-
+        if ($searchString) {
+            $resultPosts = Post::select('id', 'title', 'body', 'writer', 'category_id', 'image', 'view', 'created_at')
+                ->where('status', 'published')
+                ->where('title', 'like', '%' . $searchString . '%')
+                ->with(['category:id,name']) // فقط id و name از دسته‌بندی
+                ->withCount('likes')
+                ->orderBy('created_at', 'desc')
+                ->get();
+        }else{
+            $resultPosts = [];
+        }
         $arr_posts = [];
-
         if (Auth::check()) {
             $user = auth()->user();
             $arr_posts = $user->likedPosts()->pluck('posts.id')->toArray();
         }
-
         $html = '';
 
-        foreach ($posts as $post) {
-            $html .= view('post', compact('post', 'arr_posts'))->render();
+        foreach ($resultPosts as $post) {
+            $html .= view('partials.loadPost', compact('post', 'arr_posts'))->render();
         }
         return response()->json(['html' => $html]);
     }
+
 
     public function savedPost()
     {

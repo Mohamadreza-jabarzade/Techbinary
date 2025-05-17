@@ -18,7 +18,7 @@ document.querySelectorAll('[data-focus-input-init]').forEach(function(element) {
         const nextId = this.getAttribute('data-focus-input-next');
         focusNextInput(this, prevId, nextId);
     });
-
+    
 // Handle paste event to split the pasted code into each input
     element.addEventListener('paste', function(event) {
         event.preventDefault();
@@ -27,7 +27,7 @@ document.querySelectorAll('[data-focus-input-init]').forEach(function(element) {
 
         // Get all input fields
         const inputs = document.querySelectorAll('[data-focus-input-init]');
-
+        
         // Iterate over the inputs and assign values from the pasted string
         inputs.forEach((input, index) => {
             if (digits[index]) {

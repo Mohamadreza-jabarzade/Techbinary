@@ -13,4 +13,8 @@ function hideAlert(alert) {
     console.log(alert);
     alert.classList.remove("alert-show");
     alert.classList.add("alert-hide");
+    setTimeout(()=>{
+        delete(alert);
+        remove(alert);
+    },1000);
 }

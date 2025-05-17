@@ -22,7 +22,7 @@ class CommentFactory extends Factory
             'content' => $this->faker->text(),
             'post_id' => $this->faker->numberBetween(1, 40), // فرض کن 40 پست داریم
             'user_id' => $this->faker->numberBetween(1, 40), // فرض کن 40 کاربر داریم
-            'status' => $this->faker->randomElement(['approved', 'pending']),
+            'status' => 'approved',
             'created_at' => Carbon::now()->subDays(rand(1, 90)), // تاریخ تصادفی بین 1 تا 90 روز پیش
         ];
     }
