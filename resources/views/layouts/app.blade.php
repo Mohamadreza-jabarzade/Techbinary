@@ -13,6 +13,7 @@
 </head>
 
 <body dir="rtl">
+    <div>@include('partials.alert')</div>
     @include('layouts.header')
     @yield('content')
 

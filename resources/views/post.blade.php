@@ -18,10 +18,7 @@
                 <div class="icon-wrapper h-20 flex items-start gap-1 md:gap-3">
                     <a href="" class="flex flex-col items-center justify-center"> <i class="fa fa-telegram icon"></i></a>
                     <a href="" class="flex flex-col items-center justify-center"> <i class="fa fa-instagram icon"></i></a>
-                    <!-- <span class="flex flex-col items-center justify-center">
-                        <i class="fa fa-eye icon"></i>
-                        <span class="text-sm text-dark-text-soft">25</span>
-                    </span> -->
+
                     <!-- Bookmark -->
                     <label>
                         <input type="checkbox" class="icon-checkbox bookmark-toggle" hidden />
@@ -54,7 +51,10 @@
                         <i class="fa fa-heart-o like-icon"></i>
                         <span class="text-sm text-dark-text-soft">{{$post->likes_count}}</span>
                     </label>
-
+                    <span class="flex flex-col items-center justify-center">
+                        <i class="fa fa-eye icon"></i>
+                        <span class="text-sm text-dark-text-soft">{{$post->view}}</span>
+                    </span>
 
                     <!-- Bookmark -->
                     <label>
@@ -83,7 +83,7 @@
                     @csrf
                     <input type="hidden" name="post_id" value="{{$post->id}}">
                     <div class="post-author mb-10">
-                        <img src="/images/images1.png" alt="Author" class="post-comment-img" />
+                        <img  src="/images/images1.png" alt="Author" class="post-comment-img" />
                         <div class="flex flex-col justify-center">
                             <span class="post-comment-text">
                                 @auth
@@ -95,15 +95,25 @@
                         </div>
                     </div>
 
-                    <textarea name="content" class="w-full h-auto resize-none border-none outline-none"
+                    <textarea
+                        @auth()
+                        @else
+                            disabled
+                        @endauth
+                        name="content" class="w-full h-auto resize-none border-none outline-none"
                               placeholder="چیزی بنویسید."></textarea>
                     <hr class="hr-post" />
 
                     <div class="w-full flex items-center justify-end gap-5">
                         <button type="reset"
                                 class="bg-transparent border-gray-700 border-2 rounded-2xl px-3 py-1.5 text-black text-sm font-bold">انصراف</button>
-                        <button type="submit"
-                                class="bg-blue-400 rounded-2xl px-3 py-1.5 text-white text-sm font-bold">ارسال نظر</button>
+                        @auth()
+                            <button type="submit"
+                                    class="bg-blue-400 rounded-2xl px-3 py-1.5 text-white text-sm font-bold">ارسال نظر</button>
+                        @else
+                            <a href="{{ route('showLogin', ['next' => url()->full()]) }}"
+                                    class="bg-blue-400 rounded-2xl px-3 py-1.5 text-white text-sm font-bold">لطفا ابتدا وارد شوید</a>
+                        @endauth
                     </div>
                 </form>
 

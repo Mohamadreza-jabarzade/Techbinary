@@ -12,6 +12,9 @@
     @endif
     <form action="{{route('login')}}" method="post" class="md:flex-1 w-4/5 flex flex-col gap-3 justify-center">
         @csrf
+        @if(request('next'))
+            <input type="hidden" name="next" value="{{ request('next') }}">
+        @endif
         <h1 class="text-my-second text-lg font-medium">ورود به حساب کاربری</h1>
         <input class="auth-input" type="email" name="email" placeholder="ایمیل خود را وارد کنید" required>
         @error('email')

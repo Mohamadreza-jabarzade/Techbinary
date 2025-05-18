@@ -71,9 +71,12 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            $request->session()->regenerate(); // جلوگیری از session fixation
+            if ($request->filled('next')) {
+                return redirect($request->input('next'));
+            }
             return redirect()->intended(route('showHome'));
         }
+
 
         return back()->withErrors([
             'email' => 'اطلاعات وارد شده صحیح نمی‌باشد.',
