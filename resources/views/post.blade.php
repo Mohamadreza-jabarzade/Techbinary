@@ -119,16 +119,18 @@
 
                 <!-- Existing Comment -->
                 @foreach($post->comments as $comment)
-                    <div class="w-full border border-black/10 px-3 py-4">
-                        <div class="post-author mb-5">
-                            <img src="/images/images1.png" alt="Author" class="post-comment-img" />
-                            <div class="flex flex-col justify-center">
-                                <span class="post-comment-text text-dark-text-soft">{{$comment->author}}</span>
-                                <span class="text-[13px] opacity-60 font-medium">{{\Carbon\Carbon::parse($comment->created_at)->diffForHumans()}}</span>
+                    @if($comment->status == "approved")
+                        <div class="w-full border border-black/10 px-3 py-4">
+                            <div class="post-author mb-5">
+                                <img src="/images/images1.png" alt="Author" class="post-comment-img" />
+                                <div class="flex flex-col justify-center">
+                                    <span class="post-comment-text text-dark-text-soft">{{$comment->author}}</span>
+                                    <span class="text-[13px] opacity-60 font-medium">{{\Carbon\Carbon::parse($comment->created_at)->diffForHumans()}}</span>
+                                </div>
                             </div>
+                            <p>{{$comment->content}}</p>
                         </div>
-                        <p>{{$comment->content}}</p>
-                    </div>
+                    @endif
                 @endforeach
             </div>
         </main>

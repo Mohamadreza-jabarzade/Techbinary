@@ -29,7 +29,13 @@
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg bg-light-text-Primary min-h-52">
 
 
-                    <form id="edit" action="{{route('updateCategory')}}" method="post" class="p-10 w-full flex gap-10 flex-col">
+                    <form id="edit" action="
+                    @if(isset($category))
+                    {{route('updateCategory')}}
+                    @else
+                    {{route('createCategory')}}
+                    @endif
+                    " method="post" class="p-10 w-full flex gap-10 flex-col">
                         @csrf
                         @if(isset($category))
                             @method('PATCH')
@@ -60,7 +66,11 @@
                                 @enderror
                             </label>
                         </div>
-                        <button type="submit" class="bg-orange-500 cursor-pointer text-white font-bold px-3 py-2 rounded-xl max-w-20 text-center">افزودن</button>
+
+                        <div class="space-x-3">
+                            <button type="submit" class="bg-green-500 cursor-pointer text-white font-bold px-3 py-2 rounded-xl max-w-20 text-center">افزودن</button>
+                            <a href="{{route('showCategories')}}" class="bg-orange-500 cursor-pointer text-white font-bold px-3 py-2 rounded-xl max-w-20 text-center">بازگشت</a>
+                        </div>
                     </form>
 
                 </div>

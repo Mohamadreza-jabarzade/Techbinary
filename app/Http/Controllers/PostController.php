@@ -28,7 +28,7 @@ class PostController extends Controller
                     ->where('category_id', $category_id)
                     ->with(['category:id,name']) // فقط id و name از دسته‌بندی
                     ->withCount('likes')
-                    ->orderBy('id', 'desc')
+                    ->orderBy('created_at', 'desc')
                     ->get();
             }
             else{
@@ -36,7 +36,7 @@ class PostController extends Controller
                     ->where('status', 'published')
                     ->with(['category:id,name']) // فقط id و name از دسته‌بندی
                     ->withCount('likes')
-                    ->orderBy('id', 'desc')
+                    ->orderBy('created_at', 'desc')
                     ->get();
             }
 

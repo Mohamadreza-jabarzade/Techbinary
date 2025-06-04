@@ -130,12 +130,8 @@ class AdminController extends Controller
     }
     public function showPosts()
     {
-        $posts = Post::with(['category:id,name']) // فقط ستون id و name از category
-        ->withCount('comments')
-            ->addSelect('id', 'title', 'category_id', 'image', 'writer', 'view', 'status')
-            ->orderBy('created_at', 'DESC')
-            ->get();
-        return view('admin.posts',compact('posts'));
+
+        return view('admin.posts');
     }
 
     public function showEditPost(Post $post)
@@ -228,11 +224,12 @@ class AdminController extends Controller
     }
     public function showComments()
     {
-        $comments = Comment::with('post:id,title')
-            ->select('id','author','content','post_id','created_at','status')
-            ->orderBy('created_at','DESC')
-            ->get();
-        return view('admin.comments',compact('comments'));
+//        $comments = Comment::with('post:id,title')
+//            ->select('id','author','content','post_id','created_at','status')
+//            ->orderBy('created_at','DESC')
+//            ->get();
+//        ,compact('comments'));
+        return view('admin.comments');
     }
 
     public function commentDelete(deleteCommentRequest $request)

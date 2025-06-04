@@ -17,7 +17,7 @@ class CommentController extends Controller
             'user_id' => auth()->user()->id,
         ]);
         if ($createdComment) {
-            return redirect()->back()->with('success', 'کامنت با موفقیت ارسال شد.');
+            return redirect()->back()->with('success', ' کامنت با موفقیت ارسال شد. لطفا منتطر تایید کامنت خود بمانید. ');
         }
         else{
             return redirect()->back()->with('fail', 'failed to create comment');

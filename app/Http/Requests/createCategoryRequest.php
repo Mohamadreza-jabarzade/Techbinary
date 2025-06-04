@@ -23,7 +23,7 @@ class createCategoryRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:categories,name|max:255',
-            'slug' => 'required|max:255',
+            'slug' => 'required|max:255|unique:categories,slug',
         ];
     }
 }

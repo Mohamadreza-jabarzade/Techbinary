@@ -26,7 +26,7 @@ class updateCategoryRequest extends FormRequest
             '_token' => 'nullable|string',
             'category_id' => 'required|exists:categories,id|integer',
             'name' => 'required|max:255|string',
-            'slug' => 'required|max:300|string',
+            'slug' => 'required|max:300|string|unique:categories,slug',
         ];
     }
 }
